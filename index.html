@@ -6,497 +6,125 @@
 <title>福岡親子行程 2026</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Playfair+Display:ital,wght@0,700;1,400&display=swap');
-
-:root {
-  --red: #C0392B;
-  --red-light: #E74C3C;
-  --red-pale: #FDECEA;
-  --cream: #FDF8F0;
-  --warm-white: #FEFCF8;
-  --ink: #1A1209;
-  --brown: #5C3317;
-  --gold: #D4A843;
-  --gold-light: #F0CC70;
-  --gray: #8C7B6B;
-  --gray-light: #EDE8E0;
-  --shadow: 0 4px 20px rgba(26,18,9,0.10);
-  --shadow-lg: 0 8px 40px rgba(26,18,9,0.15);
-}
-
-* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-
-body {
-  font-family: 'Noto Sans TC', sans-serif;
-  background: var(--cream);
-  color: var(--ink);
-  min-height: 100vh;
-  padding-bottom: 80px;
-  overflow-x: hidden;
-}
-
-.hero {
-  background: var(--red);
-  color: white;
-  padding: 40px 20px 30px;
-  position: relative;
-  overflow: hidden;
-}
-.hero::before {
-  content: '';
-  position: absolute;
-  top: -60px; right: -60px;
-  width: 200px; height: 200px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.06);
-}
-.hero::after {
-  content: '';
-  position: absolute;
-  bottom: -40px; left: -40px;
-  width: 160px; height: 160px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.04);
-}
-.hero-en {
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-  font-size: 13px;
-  letter-spacing: 3px;
-  opacity: 0.7;
-  text-transform: uppercase;
-  margin-bottom: 6px;
-}
-.hero-title {
-  font-size: 32px;
-  font-weight: 900;
-  line-height: 1.1;
-  letter-spacing: -0.5px;
-  margin-bottom: 6px;
-}
-.hero-sub {
-  font-size: 14px;
-  opacity: 0.85;
-  margin-bottom: 18px;
-}
-.hero-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-.hero-tag {
-  background: rgba(255,255,255,0.18);
-  border: 1px solid rgba(255,255,255,0.3);
-  border-radius: 20px;
-  padding: 4px 12px;
-  font-size: 12px;
-  letter-spacing: 0.5px;
-}
-
-.quick-strip {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 0;
-  background: var(--brown);
-}
-.quick-item {
-  padding: 14px 10px;
-  text-align: center;
-  color: white;
-  border-right: 1px solid rgba(255,255,255,0.12);
-}
-.quick-item:last-child { border-right: none; }
-.quick-icon { font-size: 20px; display: block; margin-bottom: 3px; }
-.quick-val { font-size: 13px; font-weight: 700; }
-.quick-lbl { font-size: 10px; opacity: 0.65; }
-
-.bottom-nav {
-  position: fixed;
-  bottom: 0; left: 0; right: 0;
-  background: white;
-  border-top: 1px solid var(--gray-light);
-  display: flex;
-  z-index: 100;
-  box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
-}
-.nav-btn {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 10px 4px 8px;
-  border: none;
-  background: none;
-  cursor: pointer;
-  transition: all 0.2s;
-  font-family: inherit;
-}
-.nav-btn.active { color: var(--red); }
-.nav-btn:not(.active) { color: var(--gray); }
-.nav-icon { font-size: 22px; line-height: 1; }
-.nav-label { font-size: 10px; margin-top: 3px; font-weight: 500; }
-
-.section { display: none; }
-.section.active { display: block; }
-
-.days-scroll {
-  display: flex;
-  gap: 8px;
-  padding: 16px 20px;
-  overflow-x: auto;
-  scrollbar-width: none;
-  background: white;
-  border-bottom: 1px solid var(--gray-light);
-  position: sticky;
-  top: 0;
-  z-index: 10;
-}
-.days-scroll::-webkit-scrollbar { display: none; }
-.day-pill {
-  flex-shrink: 0;
-  padding: 8px 16px;
-  border-radius: 20px;
-  border: 1.5px solid var(--gray-light);
-  background: white;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
-  color: var(--gray);
-  white-space: nowrap;
-  font-family: inherit;
-}
-.day-pill.active {
-  background: var(--red);
-  border-color: var(--red);
-  color: white;
-}
-
-.day-content { padding: 0 16px 16px; }
-.day-header {
-  background: linear-gradient(135deg, var(--red) 0%, #A93226 100%);
-  color: white;
-  margin: 16px 0 12px;
-  padding: 16px 18px;
-  border-radius: 14px;
-  box-shadow: var(--shadow);
-}
-.day-num { font-size: 11px; letter-spacing: 2px; opacity: 0.7; text-transform: uppercase; margin-bottom: 2px; }
-.day-title { font-size: 18px; font-weight: 800; line-height: 1.2; }
-.day-date { font-size: 12px; opacity: 0.75; margin-top: 4px; }
-
-.timeline { position: relative; }
-.timeline::before {
-  content: '';
-  position: absolute;
-  left: 36px;
-  top: 0; bottom: 0;
-  width: 2px;
-  background: linear-gradient(to bottom, var(--red-pale), var(--gray-light));
-}
-
-.tl-item {
-  display: flex;
-  gap: 12px;
-  margin-bottom: 4px;
-  position: relative;
-}
-.tl-time {
-  width: 60px;
-  flex-shrink: 0;
-  text-align: right;
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--gray);
-  padding-top: 14px;
-  letter-spacing: -0.3px;
-}
-.tl-dot {
-  width: 14px;
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 16px;
-  position: relative;
-  z-index: 1;
-}
-.tl-dot-circle {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: white;
-  border: 2.5px solid var(--gray-light);
-  flex-shrink: 0;
-}
-.tl-dot-circle.highlight { border-color: var(--red); background: var(--red); }
-.tl-dot-circle.gold { border-color: var(--gold); background: var(--gold); }
-
-.tl-card {
-  flex: 1;
-  background: white;
-  border-radius: 12px;
-  padding: 12px 14px;
-  margin-bottom: 8px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
-  border-left: 3px solid transparent;
-}
-.tl-card.highlight { border-left-color: var(--red); }
-.tl-card.gold { border-left-color: var(--gold); }
-.tl-card.plain { box-shadow: none; background: var(--gray-light); }
-
-.tl-emoji { font-size: 18px; margin-right: 6px; }
-.tl-name { font-size: 14px; font-weight: 700; color: var(--ink); display: inline; }
-.tl-name-row { display: flex; align-items: center; flex-wrap: wrap; gap: 4px; margin-bottom: 4px; }
-.tl-desc { font-size: 12px; color: var(--gray); line-height: 1.6; margin-bottom: 6px; }
-.tl-badge {
-  display: inline-block;
-  background: var(--red-pale);
-  color: var(--red);
-  border-radius: 4px;
-  padding: 2px 7px;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.3px;
-  margin-right: 4px;
-  margin-bottom: 4px;
-}
-.tl-badge.gold-badge { background: #FDF4E0; color: #8B6914; }
-.tl-badge.green-badge { background: #E8F5E9; color: #2E7D32; }
-
-.map-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  background: var(--red);
-  color: white;
-  border: none;
-  border-radius: 20px;
-  padding: 5px 12px;
-  font-size: 11px;
-  font-weight: 700;
-  cursor: pointer;
-  text-decoration: none;
-  margin-top: 6px;
-  font-family: inherit;
-  transition: opacity 0.2s;
-}
-.map-btn:active { opacity: 0.8; }
-.map-btn.outline {
-  background: transparent;
-  border: 1.5px solid var(--red);
-  color: var(--red);
-}
-
-.meal-strip {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-  margin-top: 8px;
-}
-.meal-tag {
-  background: var(--cream);
-  border: 1px solid var(--gray-light);
-  border-radius: 6px;
-  padding: 3px 9px;
-  font-size: 11px;
-  color: var(--brown);
-  font-weight: 500;
-}
-
-.transport-section { padding: 16px; }
-.transport-card {
-  background: white;
-  border-radius: 14px;
-  padding: 16px;
-  margin-bottom: 12px;
-  box-shadow: var(--shadow);
-}
-.transport-title {
-  font-size: 15px;
-  font-weight: 800;
-  color: var(--ink);
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.transport-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 8px 0;
-  border-bottom: 1px solid var(--gray-light);
-  font-size: 13px;
-}
-.transport-row:last-child { border-bottom: none; }
-.transport-label { color: var(--gray); font-size: 12px; }
-.transport-val { font-weight: 600; }
-.fare-badge {
-  background: var(--red-pale);
-  color: var(--red);
-  border-radius: 6px;
-  padding: 2px 8px;
-  font-size: 12px;
-  font-weight: 700;
-  white-space: nowrap;
-}
-
-.hotel-section { padding: 16px; }
-.hotel-card {
-  background: white;
-  border-radius: 14px;
-  overflow: hidden;
-  margin-bottom: 14px;
-  box-shadow: var(--shadow);
-}
-.hotel-header {
-  background: linear-gradient(135deg, var(--brown) 0%, #3D2208 100%);
-  color: white;
-  padding: 14px 16px;
-}
-.hotel-name { font-size: 15px; font-weight: 800; margin-bottom: 3px; }
-.hotel-nights { font-size: 12px; opacity: 0.7; }
-.hotel-body { padding: 14px 16px; }
-.hotel-addr { font-size: 12px; color: var(--gray); line-height: 1.6; margin-bottom: 10px; }
-
-.packing-section { padding: 16px; }
-.pack-category {
-  background: white;
-  border-radius: 14px;
-  padding: 16px;
-  margin-bottom: 14px;
-  box-shadow: var(--shadow);
-}
-.pack-title {
-  font-size: 14px;
-  font-weight: 800;
-  margin-bottom: 12px;
-  color: var(--ink);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.pack-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 6px;
-}
-.pack-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 10px;
-  background: var(--cream);
-  border-radius: 8px;
-  font-size: 12px;
-  cursor: pointer;
-  transition: all 0.2s;
-  user-select: none;
-}
-.pack-item.checked {
-  background: #E8F5E9;
-  text-decoration: line-through;
-  color: var(--gray);
-}
-.pack-check {
-  width: 18px;
-  height: 18px;
-  border-radius: 4px;
-  border: 2px solid var(--gray-light);
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 11px;
-  transition: all 0.2s;
-}
-.pack-item.checked .pack-check {
-  background: #4CAF50;
-  border-color: #4CAF50;
-  color: white;
-}
-
-.budget-section { padding: 16px; }
-.budget-total {
-  background: linear-gradient(135deg, var(--red) 0%, #8B1A0F 100%);
-  color: white;
-  border-radius: 16px;
-  padding: 20px;
-  margin-bottom: 16px;
-  text-align: center;
-  box-shadow: var(--shadow-lg);
-}
-.budget-total-label { font-size: 12px; opacity: 0.75; margin-bottom: 4px; }
-.budget-total-val { font-size: 32px; font-weight: 900; letter-spacing: -1px; }
-.budget-total-sub { font-size: 11px; opacity: 0.65; margin-top: 4px; }
-.budget-card {
-  background: white;
-  border-radius: 14px;
-  padding: 16px;
-  margin-bottom: 12px;
-  box-shadow: var(--shadow);
-}
-.budget-day-title { font-size: 13px; font-weight: 700; margin-bottom: 10px; color: var(--ink); }
-.budget-row {
-  display: flex;
-  justify-content: space-between;
-  padding: 6px 0;
-  font-size: 13px;
-  border-bottom: 1px dashed var(--gray-light);
-}
-.budget-row:last-child { border-bottom: none; padding-bottom: 0; }
-.budget-row .label { color: var(--gray); }
-.budget-row .val { font-weight: 700; }
-.budget-row.total .val { color: var(--red); }
-
-.info-section { padding: 16px; }
-.info-card {
-  background: white;
-  border-radius: 14px;
-  padding: 16px;
-  margin-bottom: 12px;
-  box-shadow: var(--shadow);
-}
-.info-title {
-  font-size: 14px;
-  font-weight: 800;
-  color: var(--ink);
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.info-item {
-  padding: 8px 0;
-  font-size: 13px;
-  border-bottom: 1px solid var(--gray-light);
-  line-height: 1.6;
-  color: var(--ink);
-}
-.info-item:last-child { border-bottom: none; }
-.info-item strong { color: var(--red); }
-
-.alert {
-  background: #FFF3CD;
-  border-left: 4px solid var(--gold);
-  border-radius: 8px;
-  padding: 10px 12px;
-  font-size: 12px;
-  line-height: 1.6;
-  margin-bottom: 8px;
-  color: #856404;
-}
-
-.sec-title {
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 2.5px;
-  text-transform: uppercase;
-  color: var(--gray);
-  padding: 20px 16px 8px;
-}
-
-::-webkit-scrollbar { width: 0; height: 0; }
+:root{--red:#C0392B;--red-pale:#FDECEA;--cream:#FDF8F0;--ink:#1A1209;--brown:#5C3317;--gold:#D4A843;--gray:#8C7B6B;--gray-light:#EDE8E0;--shadow:0 4px 20px rgba(26,18,9,.10);--shadow-lg:0 8px 40px rgba(26,18,9,.15)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--cream);color:var(--ink);min-height:100vh;padding-bottom:80px;overflow-x:hidden}
+.hero{background:var(--red);color:white;padding:40px 20px 30px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.06)}
+.hero::after{content:'';position:absolute;bottom:-40px;left:-40px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.04)}
+.hero-en{font-family:'Playfair Display',serif;font-style:italic;font-size:13px;letter-spacing:3px;opacity:.7;text-transform:uppercase;margin-bottom:6px}
+.hero-title{font-size:32px;font-weight:900;line-height:1.1;letter-spacing:-.5px;margin-bottom:6px}
+.hero-sub{font-size:14px;opacity:.85;margin-bottom:18px}
+.hero-tags{display:flex;flex-wrap:wrap;gap:8px}
+.hero-tag{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);border-radius:20px;padding:4px 12px;font-size:12px;letter-spacing:.5px}
+.quick-strip{display:grid;grid-template-columns:1fr 1fr 1fr;background:var(--brown)}
+.quick-item{padding:14px 10px;text-align:center;color:white;border-right:1px solid rgba(255,255,255,.12)}
+.quick-item:last-child{border-right:none}
+.quick-icon{font-size:20px;display:block;margin-bottom:3px}
+.quick-val{font-size:13px;font-weight:700}
+.quick-lbl{font-size:10px;opacity:.65}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:white;border-top:1px solid var(--gray-light);display:flex;z-index:100;box-shadow:0 -4px 20px rgba(0,0,0,.08)}
+.nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;padding:10px 4px 8px;border:none;background:none;cursor:pointer;font-family:inherit}
+.nav-btn.active{color:var(--red)}
+.nav-btn:not(.active){color:var(--gray)}
+.nav-icon{font-size:22px;line-height:1}
+.nav-label{font-size:10px;margin-top:3px;font-weight:500}
+.section{display:none}
+.section.active{display:block}
+.days-scroll{display:flex;gap:8px;padding:16px 20px;overflow-x:auto;scrollbar-width:none;background:white;border-bottom:1px solid var(--gray-light);position:sticky;top:0;z-index:10}
+.days-scroll::-webkit-scrollbar{display:none}
+.day-pill{flex-shrink:0;padding:8px 16px;border-radius:20px;border:1.5px solid var(--gray-light);background:white;font-size:13px;font-weight:600;cursor:pointer;color:var(--gray);white-space:nowrap;font-family:inherit}
+.day-pill.active{background:var(--red);border-color:var(--red);color:white}
+.day-content{padding:0 16px 16px}
+.day-header{background:linear-gradient(135deg,var(--red) 0%,#A93226 100%);color:white;margin:16px 0 12px;padding:16px 18px;border-radius:14px;box-shadow:var(--shadow)}
+.day-num{font-size:11px;letter-spacing:2px;opacity:.7;text-transform:uppercase;margin-bottom:2px}
+.day-title{font-size:18px;font-weight:800;line-height:1.2}
+.day-date{font-size:12px;opacity:.75;margin-top:4px}
+.timeline{position:relative}
+.timeline::before{content:'';position:absolute;left:36px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--red-pale),var(--gray-light))}
+.tl-item{display:flex;gap:12px;margin-bottom:4px;position:relative}
+.tl-time{width:60px;flex-shrink:0;text-align:right;font-size:11px;font-weight:700;color:var(--gray);padding-top:14px;letter-spacing:-.3px}
+.tl-dot{width:14px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;padding-top:16px;position:relative;z-index:1}
+.tl-dot-circle{width:14px;height:14px;border-radius:50%;background:white;border:2.5px solid var(--gray-light);flex-shrink:0}
+.tl-dot-circle.h{border-color:var(--red);background:var(--red)}
+.tl-dot-circle.g{border-color:var(--gold);background:var(--gold)}
+.tl-card{flex:1;background:white;border-radius:12px;padding:12px 14px;margin-bottom:8px;box-shadow:0 2px 10px rgba(0,0,0,.06);border-left:3px solid transparent}
+.tl-card.h{border-left-color:var(--red)}
+.tl-card.g{border-left-color:var(--gold)}
+.tl-card.plain{box-shadow:none;background:var(--gray-light)}
+.tl-emoji{font-size:18px;margin-right:6px}
+.tl-name{font-size:14px;font-weight:700;color:var(--ink)}
+.tl-nr{display:flex;align-items:center;flex-wrap:wrap;gap:4px;margin-bottom:4px}
+.tl-desc{font-size:12px;color:var(--gray);line-height:1.6;margin-bottom:6px}
+.badge{display:inline-block;background:var(--red-pale);color:var(--red);border-radius:4px;padding:2px 7px;font-size:10px;font-weight:700;margin-right:4px;margin-bottom:4px}
+.badge.gd{background:#FDF4E0;color:#8B6914}
+.badge.gr{background:#E8F5E9;color:#2E7D32}
+.map-btn{display:inline-flex;align-items:center;gap:5px;background:var(--red);color:white;border:none;border-radius:20px;padding:5px 12px;font-size:11px;font-weight:700;cursor:pointer;text-decoration:none;margin-top:6px;font-family:inherit}
+.map-btn.ol{background:transparent;border:1.5px solid var(--red);color:var(--red)}
+.meal-strip{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.meal-tag{background:var(--cream);border:1px solid var(--gray-light);border-radius:6px;padding:3px 9px;font-size:11px;color:var(--brown);font-weight:500}
+/* FOOD CARDS */
+.food-section{padding:0 16px 16px}
+.food-section-title{font-size:13px;font-weight:800;letter-spacing:1px;color:var(--gray);text-transform:uppercase;margin:16px 0 10px;display:flex;align-items:center;gap:6px}
+.food-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:8px}
+.food-card{background:white;border-radius:12px;overflow:hidden;box-shadow:var(--shadow)}
+.food-card-emoji{font-size:32px;text-align:center;padding:14px 0 6px}
+.food-card-body{padding:0 12px 12px}
+.food-card-name{font-size:13px;font-weight:800;color:var(--ink);margin-bottom:2px;line-height:1.3}
+.food-card-sub{font-size:11px;color:var(--gray);margin-bottom:6px;line-height:1.5}
+.food-card-time{font-size:10px;color:var(--gold);font-weight:700;display:block;margin-bottom:4px}
+.food-card-price{font-size:10px;color:var(--red);font-weight:700}
+.food-card-map{display:inline-block;font-size:10px;color:var(--red);text-decoration:none;margin-top:4px;font-weight:600}
+/* TRANSPORT */
+.transport-section{padding:16px}
+.transport-card{background:white;border-radius:14px;padding:16px;margin-bottom:12px;box-shadow:var(--shadow)}
+.transport-title{font-size:15px;font-weight:800;color:var(--ink);margin-bottom:10px}
+.transport-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--gray-light);font-size:13px}
+.transport-row:last-child{border-bottom:none}
+.transport-label{color:var(--gray);font-size:12px}
+.transport-val{font-weight:600}
+.fare-badge{background:var(--red-pale);color:var(--red);border-radius:6px;padding:2px 8px;font-size:12px;font-weight:700;white-space:nowrap}
+/* HOTEL */
+.hotel-section{padding:16px}
+.hotel-card{background:white;border-radius:14px;overflow:hidden;margin-bottom:14px;box-shadow:var(--shadow)}
+.hotel-header{background:linear-gradient(135deg,var(--brown) 0%,#3D2208 100%);color:white;padding:14px 16px}
+.hotel-name{font-size:15px;font-weight:800;margin-bottom:3px}
+.hotel-nights{font-size:12px;opacity:.7}
+.hotel-body{padding:14px 16px}
+.hotel-addr{font-size:12px;color:var(--gray);line-height:1.6;margin-bottom:10px}
+/* PACKING */
+.packing-section{padding:16px}
+.pack-category{background:white;border-radius:14px;padding:16px;margin-bottom:14px;box-shadow:var(--shadow)}
+.pack-title{font-size:14px;font-weight:800;margin-bottom:12px;color:var(--ink)}
+.pack-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.pack-item{display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--cream);border-radius:8px;font-size:12px;cursor:pointer;user-select:none}
+.pack-item.checked{background:#E8F5E9;text-decoration:line-through;color:var(--gray)}
+.pack-check{width:18px;height:18px;border-radius:4px;border:2px solid var(--gray-light);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px}
+.pack-item.checked .pack-check{background:#4CAF50;border-color:#4CAF50;color:white}
+/* BUDGET */
+.budget-section{padding:16px}
+.budget-total{background:linear-gradient(135deg,var(--red) 0%,#8B1A0F 100%);color:white;border-radius:16px;padding:20px;margin-bottom:16px;text-align:center;box-shadow:var(--shadow-lg)}
+.budget-total-label{font-size:12px;opacity:.75;margin-bottom:4px}
+.budget-total-val{font-size:32px;font-weight:900;letter-spacing:-1px}
+.budget-total-sub{font-size:11px;opacity:.65;margin-top:4px}
+.budget-card{background:white;border-radius:14px;padding:16px;margin-bottom:12px;box-shadow:var(--shadow)}
+.budget-day-title{font-size:13px;font-weight:700;margin-bottom:10px;color:var(--ink)}
+.budget-row{display:flex;justify-content:space-between;padding:6px 0;font-size:13px;border-bottom:1px dashed var(--gray-light)}
+.budget-row:last-child{border-bottom:none}
+.budget-row .label{color:var(--gray)}
+.budget-row .val{font-weight:700}
+.budget-row.total .val{color:var(--red)}
+.info-card{background:white;border-radius:14px;padding:16px;margin-bottom:12px;box-shadow:var(--shadow)}
+.info-item{padding:8px 0;font-size:13px;border-bottom:1px solid var(--gray-light);line-height:1.6}
+.info-item:last-child{border-bottom:none}
+.info-item strong{color:var(--red)}
+.alert{background:#FFF3CD;border-left:4px solid var(--gold);border-radius:8px;padding:10px 12px;font-size:12px;line-height:1.6;margin-bottom:8px;color:#856404}
+.sec-title{font-size:11px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--gray);padding:20px 16px 8px}
+/* Cafe options */
+.cafe-options{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+.cafe-opt{background:var(--cream);border-radius:10px;padding:10px 12px;font-size:12px;color:var(--ink);line-height:1.6;border-left:3px solid var(--gold)}
+.cafe-opt strong{color:var(--brown);display:block;margin-bottom:2px}
+::-webkit-scrollbar{width:0;height:0}
 </style>
 </head>
 <body>
@@ -514,966 +142,1313 @@ body {
 </div>
 
 <div class="quick-strip">
-  <div class="quick-item">
-    <span class="quick-icon">🗓️</span>
-    <div class="quick-val">8天7夜</div>
-    <div class="quick-lbl">行程天數</div>
-  </div>
-  <div class="quick-item">
-    <span class="quick-icon">👨‍👩‍👧‍👦</span>
-    <div class="quick-val">4大2小</div>
-    <div class="quick-lbl">兩個家庭</div>
-  </div>
-  <div class="quick-item">
-    <span class="quick-icon">🏨</span>
-    <div class="quick-val">3間飯店</div>
-    <div class="quick-lbl">住宿安排</div>
-  </div>
+  <div class="quick-item"><span class="quick-icon">🗓️</span><div class="quick-val">8天7夜</div><div class="quick-lbl">行程天數</div></div>
+  <div class="quick-item"><span class="quick-icon">👨‍👩‍👧‍👦</span><div class="quick-val">4大2小</div><div class="quick-lbl">兩個家庭</div></div>
+  <div class="quick-item"><span class="quick-icon">🏨</span><div class="quick-val">3間飯店</div><div class="quick-lbl">住宿安排</div></div>
 </div>
 
 <nav class="bottom-nav">
-  <button class="nav-btn active" onclick="showSection('itinerary', this)">
-    <span class="nav-icon">📅</span>
-    <span class="nav-label">行程</span>
-  </button>
-  <button class="nav-btn" onclick="showSection('transport', this)">
-    <span class="nav-icon">🚇</span>
-    <span class="nav-label">交通</span>
-  </button>
-  <button class="nav-btn" onclick="showSection('hotel', this)">
-    <span class="nav-icon">🏨</span>
-    <span class="nav-label">住宿</span>
-  </button>
-  <button class="nav-btn" onclick="showSection('packing', this)">
-    <span class="nav-icon">🧳</span>
-    <span class="nav-label">行李</span>
-  </button>
-  <button class="nav-btn" onclick="showSection('budget', this)">
-    <span class="nav-icon">💴</span>
-    <span class="nav-label">預算</span>
-  </button>
+  <button class="nav-btn active" onclick="showSection('itinerary',this)"><span class="nav-icon">📅</span><span class="nav-label">行程</span></button>
+  <button class="nav-btn" onclick="showSection('transport',this)"><span class="nav-icon">🚇</span><span class="nav-label">交通</span></button>
+  <button class="nav-btn" onclick="showSection('hotel',this)"><span class="nav-icon">🏨</span><span class="nav-label">住宿</span></button>
+  <button class="nav-btn" onclick="showSection('packing',this)"><span class="nav-icon">🧳</span><span class="nav-label">行李</span></button>
+  <button class="nav-btn" onclick="showSection('budget',this)"><span class="nav-icon">💴</span><span class="nav-label">預算</span></button>
 </nav>
 
 <!-- ITINERARY -->
 <div id="itinerary" class="section active">
-  <div class="days-scroll">
-    <button class="day-pill active" onclick="showDay(0, this)">D1 5/23</button>
-    <button class="day-pill" onclick="showDay(1, this)">D2 5/24</button>
-    <button class="day-pill" onclick="showDay(2, this)">D3 5/25</button>
-    <button class="day-pill" onclick="showDay(3, this)">D4 5/26</button>
-    <button class="day-pill" onclick="showDay(4, this)">D5 5/27</button>
-    <button class="day-pill" onclick="showDay(5, this)">D6 5/28</button>
-    <button class="day-pill" onclick="showDay(6, this)">D7 5/29</button>
-    <button class="day-pill" onclick="showDay(7, this)">D8 5/30</button>
-  </div>
+<div class="days-scroll">
+  <button class="day-pill active" onclick="showDay(0,this)">D1 5/23</button>
+  <button class="day-pill" onclick="showDay(1,this)">D2 5/24</button>
+  <button class="day-pill" onclick="showDay(2,this)">D3 5/25</button>
+  <button class="day-pill" onclick="showDay(3,this)">D4 5/26</button>
+  <button class="day-pill" onclick="showDay(4,this)">D5 5/27</button>
+  <button class="day-pill" onclick="showDay(5,this)">D6 5/28</button>
+  <button class="day-pill" onclick="showDay(6,this)">D7 5/29</button>
+  <button class="day-pill" onclick="showDay(7,this)">D8 5/30</button>
+</div>
 
-  <div class="day-content" id="day0">
-    <div class="day-header">
-      <div class="day-num">Day 1</div>
-      <div class="day-title">✈️ 抵達福岡<br>Kawaya串燒・超市採購</div>
-      <div class="day-date">2026年5月23日（六）</div>
-    </div>
-    <div class="timeline">
-      <div class="tl-item">
-        <div class="tl-time">15:10</div>
-        <div class="tl-dot"><div class="tl-dot-circle highlight"></div></div>
-        <div class="tl-card highlight">
-          <div class="tl-name-row"><span class="tl-emoji">✈️</span><span class="tl-name">長榮 BR102 出發</span></div>
-          <div class="tl-desc">桃園國際機場 → 福岡空港</div>
-          <span class="tl-badge">去程</span>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-time">18:20</div>
-        <div class="tl-dot"><div class="tl-dot-circle highlight"></div></div>
-        <div class="tl-card highlight">
-          <div class="tl-name-row"><span class="tl-emoji">🛬</span><span class="tl-name">抵達福岡空港</span></div>
-          <div class="tl-desc">入境 → 提行李 → 機場換匯 → 搭地鐵至祇園站（約20分，¥310/人）</div>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-time">19:30</div>
-        <div class="tl-dot"><div class="tl-dot-circle"></div></div>
-        <div class="tl-card">
-          <div class="tl-name-row"><span class="tl-emoji">🏨</span><span class="tl-name">Check-in</span></div>
-          <div class="tl-desc">Nishitetsu Hotel Croom Hakata Gion Kushida Shrine</div>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-time">20:00</div>
-        <div class="tl-dot"><div class="tl-dot-circle highlight"></div></div>
-        <div class="tl-card highlight">
-          <div class="tl-name-row"><span class="tl-emoji">🔥</span><span class="tl-name">晚餐｜Kawaya Gion かわ屋</span></div>
-          <div class="tl-desc">博多名物醬烤雞皮串燒！50年老店，距飯店步行4分鐘</div>
-          <span class="tl-badge">⚠️ 需訂位</span><span class="tl-badge">現金Only</span>
-          <div class="meal-strip">
-            <span class="meal-tag">🍢 雞皮串 ¥143起</span>
-            <span class="meal-tag">¥3,000/人</span>
-            <span class="meal-tag">17:00開始</span>
-          </div>
-          <a class="map-btn" href="https://maps.google.com/?q=博多かわ屋祇園店" target="_blank">📍 開啟導航</a>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-time">21:30</div>
-        <div class="tl-dot"><div class="tl-dot-circle gold"></div></div>
-        <div class="tl-card gold">
-          <div class="tl-name-row"><span class="tl-emoji">🛒</span><span class="tl-name">MaxValu 博多祇園店</span></div>
-          <div class="tl-desc">補嬰兒用品、明天早餐、消夜採購</div>
-          <div class="meal-strip">
-            <span class="meal-tag">🍺 罐裝啤酒</span>
-            <span class="meal-tag">🍶 清酒一合瓶</span>
-            <span class="meal-tag">🧃 柚子沙瓦</span>
-            <span class="meal-tag">🍟 炸雞零食</span>
-            <span class="meal-tag">👶 寶寶餅乾</span>
-          </div>
-          <a class="map-btn outline" href="https://maps.google.com/?q=MaxValu博多祇園店" target="_blank">📍 開啟導航</a>
-        </div>
-      </div>
+<!-- ===== DAY 1 ===== -->
+<div class="day-content" id="day0">
+<div class="day-header">
+  <div class="day-num">Day 1</div>
+  <div class="day-title">✈️ 抵達福岡<br>計程車→飯店・Kawaya串燒</div>
+  <div class="day-date">2026年5月23日（六）</div>
+</div>
+<div class="timeline">
+  <div class="tl-item">
+    <div class="tl-time">15:10</div>
+    <div class="tl-dot"><div class="tl-dot-circle h"></div></div>
+    <div class="tl-card h">
+      <div class="tl-nr"><span class="tl-emoji">✈️</span><span class="tl-name">長榮 BR102 出發</span></div>
+      <div class="tl-desc">桃園國際機場 → 福岡空港</div>
+      <span class="badge">去程</span>
     </div>
   </div>
-
-  <div class="day-content" id="day1" style="display:none">
-    <div class="day-header">
-      <div class="day-num">Day 2</div>
-      <div class="day-title">🚂 由布院之森<br>湯之坪街道・釜飯晚餐</div>
-      <div class="day-date">2026年5月24日（日）</div>
-    </div>
-    <div class="timeline">
-      <div class="tl-item">
-        <div class="tl-time">07:30</div>
-        <div class="tl-dot"><div class="tl-dot-circle"></div></div>
-        <div class="tl-card plain">
-          <div class="tl-name-row"><span class="tl-emoji">🥐</span><span class="tl-name">早餐｜BOUL' ANGE 博多站</span></div>
-          <div class="tl-desc">法式麵包，博多站地下，不排隊，邊走邊吃</div>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-time">09:17</div>
-        <div class="tl-dot"><div class="tl-dot-circle highlight"></div></div>
-        <div class="tl-card highlight">
-          <div class="tl-name-row"><span class="tl-emoji">🚂</span><span class="tl-name">由布院之森 出發</span></div>
-          <div class="tl-desc">博多 → 由布院 11:31抵達（約2小時14分）</div>
-          <span class="tl-badge">⚠️ 已預訂</span><span class="tl-badge">¥4,400/人</span>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-time">11:45</div>
-        <div class="tl-dot"><div class="tl-dot-circle highlight"></div></div>
-        <div class="tl-card highlight">
-          <div class="tl-name-row"><span class="tl-emoji">🛍️</span><span class="tl-name">湯之坪街道邊走邊吃（午餐）</span></div>
-          <div class="alert">💡 B SPEAK 開賣即售完！到站後第一件事就是去排隊！</div>
-          <div class="meal-strip">
-            <span class="meal-tag">🍰 B SPEAK 蛋糕捲</span>
-            <span class="meal-tag">🐰 Miffy麵包</span>
-            <span class="meal-tag">🍮 花麴菊家布丁銅鑼燒</span>
-            <span class="meal-tag">🥮 鞠智銅鑼燒</span>
-            <span class="meal-tag">🥔 金賞可樂餅</span>
-          </div>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-time">14:00</div>
-        <div class="tl-dot"><div class="tl-dot-circle"></div></div>
-        <div class="tl-card">
-          <div class="tl-name-row"><span class="tl-emoji">🦢</span><span class="tl-name">金鱗湖散步</span></div>
-          <div class="tl-desc">湖畔平坦，推車友善！水上鳥居超美</div>
-          <a class="map-btn outline" href="https://maps.google.com/?q=金鱗湖由布院" target="_blank">📍 導航</a>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-time">14:30</div>
-        <div class="tl-dot"><div class="tl-dot-circle"></div></div>
-        <div class="tl-card">
-          <div class="tl-name-row"><span class="tl-emoji">☕</span><span class="tl-name">Cafe La Ruche</span></div>
-          <div class="tl-desc">金鱗湖旁玻璃咖啡廳，必坐窗邊！焦糖布丁＋手沖咖啡</div>
-          <a class="map-btn outline" href="https://maps.google.com/?q=Cafe+La+Ruche+由布院" target="_blank">📍 導航</a>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-time">15:00</div>
-        <div class="tl-dot"><div class="tl-dot-circle"></div></div>
-        <div class="tl-card">
-          <div class="tl-name-row"><span class="tl-emoji">🏘️</span><span class="tl-name">SNOOPY茶屋 由布院</span></div>
-          <div class="tl-desc">全國僅5家！由布院限定，小孩超愛</div>
-          <a class="map-btn outline" href="https://maps.google.com/?q=SNOOPY茶屋由布院" target="_blank">📍 導航</a>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-time">16:00</div>
-        <div class="tl-dot"><div class="tl-dot-circle"></div></div>
-        <div class="tl-card">
-          <div class="tl-name-row"><span class="tl-emoji">🏠</span><span class="tl-name">Check-in 世紡 YOTSUMUGI</span></div>
-          <div class="tl-desc">包棟溫泉民宿，可帶寶寶一起泡溫泉！</div>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-time">17:30</div>
-        <div class="tl-dot"><div class="tl-dot-circle highlight"></div></div>
-        <div class="tl-card highlight">
-          <div class="tl-name-row"><span class="tl-emoji">🍚</span><span class="tl-name">晚餐｜由布MABUSHI心 站前店</span></div>
-          <div class="tl-desc">豐後牛釜飯一飯三吃！原味→柚子胡椒→茶泡飯</div>
-          <span class="tl-badge">⚠️ 已預訂 17:30</span>
-          <a class="map-btn" href="https://maps.google.com/?q=由布まぶし心站前" target="_blank">📍 開啟導航</a>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-time">19:30</div>
-        <div class="tl-dot"><div class="tl-dot-circle gold"></div></div>
-        <div class="tl-card gold">
-          <div class="tl-name-row"><span class="tl-emoji">🛒</span><span class="tl-name">消夜採購｜AEON MaxValu 湯布院</span></div>
-          <div class="tl-desc">由布院最晚23:00關門！順逛對面黑色7-Eleven打卡</div>
-          <div class="meal-strip">
-            <span class="meal-tag">🍺 大分地產啤酒</span>
-            <span class="meal-tag">🥃 九州焼酎</span>
-            <span class="meal-tag">🍓 在地水果</span>
-            <span class="meal-tag">🥚 溫泉蒸蛋</span>
-          </div>
-        </div>
-      </div>
+  <div class="tl-item">
+    <div class="tl-time">18:20</div>
+    <div class="tl-dot"><div class="tl-dot-circle h"></div></div>
+    <div class="tl-card h">
+      <div class="tl-nr"><span class="tl-emoji">🛬</span><span class="tl-name">抵達福岡空港</span></div>
+      <div class="tl-desc">入境 → 提行李 → 換匯 → 到達大廳</div>
     </div>
   </div>
-
-  <div class="day-content" id="day2" style="display:none">
-    <div class="day-header">
-      <div class="day-num">Day 3</div>
-      <div class="day-title">🌅 由布院晨景<br>回福岡・中洲屋台</div>
-      <div class="day-date">2026年5月25日（一）</div>
-    </div>
-    <div class="timeline">
-      <div class="tl-item">
-        <div class="tl-time">06:30</div>
-        <div class="tl-dot"><div class="tl-dot-circle highlight"></div></div>
-        <div class="tl-card highlight">
-          <div class="tl-name-row"><span class="tl-emoji">🌅</span><span class="tl-name">金鱗湖晨間散步</span></div>
-          <div class="tl-desc">清晨薄霧從湖面升起，由布院最夢幻的畫面！千萬不能錯過</div>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-time">09:30</div>
-        <div class="tl-dot"><div class="tl-dot-circle"></div></div>
-        <div class="tl-card">
-          <div class="tl-name-row"><span class="tl-emoji">🛍️</span><span class="tl-name">再逛湯之坪街道</span></div>
-          <div class="tl-desc">昨天沒買到的補買，帶伴手禮回去</div>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-time">11:00</div>
-        <div class="tl-dot"><div class="tl-dot-circle highlight"></div></div>
-        <div class="tl-card highlight">
-          <div class="tl-name-row"><span class="tl-emoji">🍱</span><span class="tl-name">午餐｜三選一</span></div>
-          <div class="tl-desc">① 由布院岳庵（金鱗湖畔老屋懷石定食 ¥2,500起）<br>② 窯燒 Pizza 櫟之丘（由布岳景觀，Tabelog百名店）<br>③ 手打蕎麥麵 泉（金鱗湖旁，清爽日式）</div>
-          <a class="map-btn outline" href="https://maps.google.com/?q=由布院岳庵" target="_blank">📍 岳庵導航</a>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-time">12:30</div>
-        <div class="tl-dot"><div class="tl-dot-circle"></div></div>
-        <div class="tl-card">
-          <div class="tl-name-row"><span class="tl-emoji">🚃</span><span class="tl-name">JR回博多</span></div>
-          <div class="tl-desc">普通列車約2小時，¥1,860/人。兩家庭各自check-in天神/中洲飯店</div>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-time">16:00</div>
-        <div class="tl-dot"><div class="tl-dot-circle"></div></div>
-        <div class="tl-card">
-          <div class="tl-name-row"><span class="tl-emoji">☕</span><span class="tl-name">Fuglen Hakata</span></div>
-          <div class="tl-desc">挪威精品咖啡九州首家！Brown Cheese酸種麵包超人氣</div>
-          <a class="map-btn outline" href="https://maps.google.com/?q=Fuglen+Hakata" target="_blank">📍 導航</a>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-time">17:30</div>
-        <div class="tl-dot"><div class="tl-dot-circle"></div></div>
-        <div class="tl-card">
-          <div class="tl-name-row"><span class="tl-emoji">🛒</span><span class="tl-name">藥妝採買｜DONKI 中洲店</span></div>
-          <div class="tl-desc">24小時驚安之殿堂，藥妝、零食、日用品</div>
-          <a class="map-btn outline" href="https://maps.google.com/?q=ドンキホーテ中洲" target="_blank">📍 導航</a>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-time">18:30</div>
-        <div class="tl-dot"><div class="tl-dot-circle highlight"></div></div>
-        <div class="tl-card highlight">
-          <div class="tl-name-row"><span class="tl-emoji">🍢</span><span class="tl-name">晚餐｜中洲屋台體驗</span></div>
-          <div class="tl-desc">那珂川河畔，18:30出發卡位！推薦屋台司（明太子天婦羅）</div>
-          <span class="tl-badge">⚠️ 現金Only</span>
-          <div class="alert">輕便推車請收折，座位小。¥3,000/人</div>
-          <div class="meal-strip">
-            <span class="meal-tag">🍜 博多拉麵</span>
-            <span class="meal-tag">🍢 烤雞皮串</span>
-            <span class="meal-tag">🥟 一口煎餃</span>
-            <span class="meal-tag">🥕 關東煮</span>
-            <span class="meal-tag">🍺 生啤酒</span>
-          </div>
-          <a class="map-btn" href="https://maps.google.com/?q=中洲屋台街福岡" target="_blank">📍 開啟導航</a>
-        </div>
-      </div>
+  <div class="tl-item">
+    <div class="tl-time">19:00</div>
+    <div class="tl-dot"><div class="tl-dot-circle"></div></div>
+    <div class="tl-card">
+      <div class="tl-nr"><span class="tl-emoji">🚕</span><span class="tl-name">計程車前往飯店</span></div>
+      <div class="tl-desc">行李多、兩家庭，搭計程車最輕鬆。福岡機場→祇園飯店約¥2,500–3,500（約15分鐘）</div>
+      <div class="alert">💡 兩家庭需各叫一台計程車，機場出口有計程車排班，直接排隊即可</div>
     </div>
   </div>
-
-  <div class="day-content" id="day3" style="display:none">
-    <div class="day-header">
-      <div class="day-num">Day 4</div>
-      <div class="day-title">⛩️ 早餐麵包→櫛田神社<br>麵包超人→大濠→水炊</div>
-      <div class="day-date">2026年5月26日（二）</div>
-    </div>
-    <div class="timeline">
-      <div class="tl-item">
-        <div class="tl-time">08:00</div>
-        <div class="tl-dot"><div class="tl-dot-circle"></div></div>
-        <div class="tl-card plain">
-          <div class="tl-name-row"><span class="tl-emoji">🥐</span><span class="tl-name">早餐｜THE FULL FULL 天神</span></div>
-          <div class="tl-desc">超人氣明太子奶油麵包！早上8點到不排隊</div>
-          <a class="map-btn outline" href="https://maps.google.com/?q=Full+Full+天神" target="_blank">📍 導航</a>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-time">09:00</div>
-        <div class="tl-dot"><div class="tl-dot-circle"></div></div>
-        <div class="tl-card">
-          <div class="tl-name-row"><span class="tl-emoji">⛩️</span><span class="tl-name">櫛田神社</span></div>
-          <div class="tl-desc">博多總鎮守！山笠神轎超震撼，靈泉鶴井戶，免費參拜</div>
-          <a class="map-btn outline" href="https://maps.google.com/?q=櫛田神社福岡" target="_blank">📍 導航</a>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-time">10:00</div>
-        <div class="tl-dot"><div class="tl-dot-circle"></div></div>
-        <div class="tl-card">
-          <div class="tl-name-row"><span class="tl-emoji">🛍️</span><span class="tl-name">上川端商店街</span></div>
-          <div class="tl-desc">博多最老商店街，特色小店、在地零食伴手禮</div>
-          <a class="map-btn outline" href="https://maps.google.com/?q=川端通商店街博多" target="_blank">📍 導航</a>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-time">10:30</div>
-        <div class="tl-dot"><div class="tl-dot-circle highlight"></div></div>
-        <div class="tl-card highlight">
-          <div class="tl-name-row"><span class="tl-emoji">🍞</span><span class="tl-name">麵包超人兒童博物館</span></div>
-          <div class="tl-desc">博多Riverain Mall 5-6F，全室內！角色見面會＋遊樂設施，含麵包超人餐廳午餐</div>
-          <span class="tl-badge">幼兒¥500</span><span class="tl-badge">1歲以下免費</span><span class="tl-badge">10:00–17:00</span>
-          <a class="map-btn" href="https://maps.google.com/?q=福岡麵包超人兒童博物館" target="_blank">📍 開啟導航</a>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-time">13:30</div>
-        <div class="tl-dot"><div class="tl-dot-circle"></div></div>
-        <div class="tl-card">
-          <div class="tl-name-row"><span class="tl-emoji">🚇</span><span class="tl-name">地鐵至大濠公園站</span></div>
-          <div class="tl-desc">中洲川端 → 大濠公園（¥260，約15分）</div>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-time">14:00</div>
-        <div class="tl-dot"><div class="tl-dot-circle"></div></div>
-        <div class="tl-card">
-          <div class="tl-name-row"><span class="tl-emoji">🌳</span><span class="tl-name">大濠公園</span></div>
-          <div class="tl-desc">推車友善！兒童遊樂區讓寶寶放電，環湖步道，草皮適合爬行</div>
-          <a class="map-btn outline" href="https://maps.google.com/?q=大濠公園福岡" target="_blank">📍 導航</a>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-time">15:30</div>
-        <div class="tl-dot"><div class="tl-dot-circle gold"></div></div>
-        <div class="tl-card gold">
-          <div class="tl-name-row"><span class="tl-emoji">🍵</span><span class="tl-name">下午茶｜&amp;LOCALS 大濠公園</span></div>
-          <div class="tl-desc">木造咖啡廳全面落地窗，主打八女茶！玉子燒御膳、八女茶霜淇淋。兼選物店可買伴手禮</div>
-          <span class="tl-badge green-badge">✅ 週二開店</span><span class="tl-badge">9:00–18:30</span>
-          <a class="map-btn" href="https://maps.google.com/?q=LOCALS大濠公園" target="_blank">📍 開啟導航</a>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-time">17:00</div>
-        <div class="tl-dot"><div class="tl-dot-circle highlight"></div></div>
-        <div class="tl-card highlight">
-          <div class="tl-name-row"><span class="tl-emoji">🍲</span><span class="tl-name">晚餐｜MIZUTAKI DAIDAI</span></div>
-          <div class="tl-desc">博多水炊雞肉鍋，湯頭清甜，親子友善</div>
-          <span class="tl-badge">⚠️ 已預訂 17:00</span>
-          <a class="map-btn" href="https://maps.google.com/?q=MIZUTAKI+DAIDAI+福岡" target="_blank">📍 開啟導航</a>
-        </div>
-      </div>
+  <div class="tl-item">
+    <div class="tl-time">19:30</div>
+    <div class="tl-dot"><div class="tl-dot-circle"></div></div>
+    <div class="tl-card">
+      <div class="tl-nr"><span class="tl-emoji">🏨</span><span class="tl-name">Check-in｜Nishitetsu Hotel Croom Hakata Gion</span></div>
+      <div class="tl-desc">放行李、整理一下，步行去晚餐</div>
     </div>
   </div>
-
-  <div class="day-content" id="day4" style="display:none">
-    <div class="day-header">
-      <div class="day-num">Day 5</div>
-      <div class="day-title">🎋 太宰府・一蘭合格拉麵<br>天神大名掃街・燒肉</div>
-      <div class="day-date">2026年5月27日（三）</div>
-    </div>
-    <div class="timeline">
-      <div class="tl-item">
-        <div class="tl-time">08:00</div>
-        <div class="tl-dot"><div class="tl-dot-circle"></div></div>
-        <div class="tl-card plain">
-          <div class="tl-name-row"><span class="tl-emoji">🍳</span><span class="tl-name">早餐｜炉端ノいとおかし</span></div>
-          <div class="tl-desc">六本松站，現烤鮭魚定食×土鍋炊飯，需預約<br>或：天神地下街上島珈琲（隨到隨坐）</div>
-          <a class="map-btn outline" href="https://maps.google.com/?q=炉端いとおかし福岡" target="_blank">📍 導航</a>
-        </div>
+  <div class="tl-item">
+    <div class="tl-time">20:00</div>
+    <div class="tl-dot"><div class="tl-dot-circle h"></div></div>
+    <div class="tl-card h">
+      <div class="tl-nr"><span class="tl-emoji">🔥</span><span class="tl-name">晚餐｜Kawaya Gion かわ屋</span></div>
+      <div class="tl-desc">博多名物醬烤雞皮串燒！50年老店，距飯店步行4分鐘。強烈建議提前訂位</div>
+      <span class="badge">⚠️ 需訂位</span><span class="badge">現金Only</span>
+      <div class="meal-strip">
+        <span class="meal-tag">🍢 雞皮串 ¥143/串</span>
+        <span class="meal-tag">¥3,000/人</span>
+        <span class="meal-tag">17:00開始</span>
       </div>
-      <div class="tl-item">
-        <div class="tl-time">09:00</div>
-        <div class="tl-dot"><div class="tl-dot-circle"></div></div>
-        <div class="tl-card">
-          <div class="tl-name-row"><span class="tl-emoji">🚃</span><span class="tl-name">西鐵前往太宰府</span></div>
-          <div class="tl-desc">天神 → 太宰府，約40分，¥420/人</div>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-time">10:00</div>
-        <div class="tl-dot"><div class="tl-dot-circle"></div></div>
-        <div class="tl-card">
-          <div class="tl-name-row"><span class="tl-emoji">⛩️</span><span class="tl-name">太宰府天滿宮</span></div>
-          <div class="tl-desc">學問之神！梅枝餅現烤必吃，境內平坦推車好走</div>
-          <a class="map-btn outline" href="https://maps.google.com/?q=太宰府天満宮" target="_blank">📍 導航</a>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-time">11:00</div>
-        <div class="tl-dot"><div class="tl-dot-circle highlight"></div></div>
-        <div class="tl-card highlight">
-          <div class="tl-name-row"><span class="tl-emoji">🍜</span><span class="tl-name">午餐｜一蘭太宰府參道店</span></div>
-          <div class="tl-desc">全球唯一五角碗！合格套餐¥1,410。帶推車店員會幫忙挪空間</div>
-          <span class="tl-badge">⚠️ 11:00前到抽號</span><span class="tl-badge">五角碗限定</span>
-          <a class="map-btn" href="https://maps.google.com/?q=一蘭太宰府参道店" target="_blank">📍 開啟導航</a>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-time">12:30</div>
-        <div class="tl-dot"><div class="tl-dot-circle"></div></div>
-        <div class="tl-card">
-          <div class="tl-name-row"><span class="tl-emoji">🚃</span><span class="tl-name">西鐵回天神</span></div>
-          <div class="tl-desc">¥420/人</div>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-time">13:30</div>
-        <div class="tl-dot"><div class="tl-dot-circle"></div></div>
-        <div class="tl-card">
-          <div class="tl-name-row"><span class="tl-emoji">🛍️</span><span class="tl-name">天神→大名→藥院逛街</span></div>
-          <div class="tl-desc">PARCO → 大名區潮牌 → 藥院方向逛到燒肉上</div>
-          <div class="meal-strip">
-            <span class="meal-tag">👟 Supreme九州唯一</span>
-            <span class="meal-tag">👕 Human Made</span>
-            <span class="meal-tag">🐱 CHIIKAWA LAND</span>
-            <span class="meal-tag">👶 GU嬰兒款</span>
-            <span class="meal-tag">💊 松本清</span>
-          </div>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-time">16:30</div>
-        <div class="tl-dot"><div class="tl-dot-circle gold"></div></div>
-        <div class="tl-card gold">
-          <div class="tl-name-row"><span class="tl-emoji">☕</span><span class="tl-name">下午咖啡｜藥院 Abeki</span></div>
-          <div class="tl-desc">無招牌隱密神店！白巧克力起司蛋糕＋自家烘焙手沖，安靜療癒</div>
-          <a class="map-btn outline" href="https://maps.google.com/?q=Abeki+薬院+福岡" target="_blank">📍 導航</a>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-time">19:00</div>
-        <div class="tl-dot"><div class="tl-dot-circle highlight"></div></div>
-        <div class="tl-card highlight">
-          <div class="tl-name-row"><span class="tl-emoji">🔥</span><span class="tl-name">晚餐｜YAKINIKU JO 燒肉上</span></div>
-          <div class="tl-desc">精選部位燒肉，肉質鮮嫩！確認嬰兒椅</div>
-          <span class="tl-badge">⚠️ 已預訂 19:00</span>
-          <a class="map-btn" href="https://maps.google.com/?q=焼肉上福岡天神" target="_blank">📍 開啟導航</a>
-        </div>
-      </div>
+      <a class="map-btn" href="https://maps.google.com/?q=博多かわ屋祇園店福岡市博多区祇園町2-8" target="_blank">📍 開啟導航</a>
     </div>
   </div>
-
-  <div class="day-content" id="day5" style="display:none">
-    <div class="day-header">
-      <div class="day-num">Day 6</div>
-      <div class="day-title">🚗 自駕日！九州動物園<br>別府地獄・LALAPORT鋼彈</div>
-      <div class="day-date">2026年5月28日（四）</div>
-    </div>
-    <div class="alert" style="margin:16px 16px 0">🚗 取車前確認：台灣駕照＋國際駕照！嬰兒安全座椅提前向AVIS預約！</div>
-    <div class="timeline">
-      <div class="tl-item">
-        <div class="tl-time">07:00</div>
-        <div class="tl-dot"><div class="tl-dot-circle"></div></div>
-        <div class="tl-card plain">
-          <div class="tl-name-row"><span class="tl-emoji">🍱</span><span class="tl-name">早餐｜便利商店快速解決</span></div>
-          <div class="tl-desc">今天行程滿，快速吃完準備取車</div>
-        </div>
+  <div class="tl-item">
+    <div class="tl-time">21:30</div>
+    <div class="tl-dot"><div class="tl-dot-circle g"></div></div>
+    <div class="tl-card g">
+      <div class="tl-nr"><span class="tl-emoji">🛒</span><span class="tl-name">MaxValu 博多祇園店</span></div>
+      <div class="tl-desc">嬰兒用品、消夜零食採購</div>
+      <div class="meal-strip">
+        <span class="meal-tag">🍺 罐裝啤酒</span>
+        <span class="meal-tag">🍶 清酒一合瓶</span>
+        <span class="meal-tag">🧃 柚子沙瓦</span>
+        <span class="meal-tag">🍟 零食炸雞</span>
+        <span class="meal-tag">👶 寶寶餅乾</span>
       </div>
-      <div class="tl-item">
-        <div class="tl-time">08:00</div>
-        <div class="tl-dot"><div class="tl-dot-circle highlight"></div></div>
-        <div class="tl-card highlight">
-          <div class="tl-name-row"><span class="tl-emoji">🚗</span><span class="tl-name">取車｜AVIS Budget 吳服町店</span></div>
-          <div class="tl-desc">地址：福岡市博多区呉服町1-1-1</div>
-          <span class="tl-badge">⚠️ 已預訂 08:00</span>
-          <a class="map-btn" href="https://maps.google.com/?q=AVIS+Budget+呉服町+福岡" target="_blank">📍 開啟導航</a>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-time">09:00</div>
-        <div class="tl-dot"><div class="tl-dot-circle highlight"></div></div>
-        <div class="tl-card highlight">
-          <div class="tl-name-row"><span class="tl-emoji">🦁</span><span class="tl-name">九州自然動物公園 AFRICA SAFARI</span></div>
-          <div class="tl-desc">自駕進園！車內直接看獅子老虎走過車旁，超安全刺激！車程約40分</div>
-          <span class="tl-badge">幼兒免費</span><span class="tl-badge">大人¥2,500</span>
-          <a class="map-btn" href="https://maps.google.com/?q=九州自然動物公園" target="_blank">📍 開啟導航</a>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-time">12:00</div>
-        <div class="tl-dot"><div class="tl-dot-circle"></div></div>
-        <div class="tl-card">
-          <div class="tl-name-row"><span class="tl-emoji">🍱</span><span class="tl-name">午餐｜動物園內或外帶野餐</span></div>
-          <div class="tl-desc">讓寶寶邊吃邊看動物，記得帶足夠點心飲料</div>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-time">13:30</div>
-        <div class="tl-dot"><div class="tl-dot-circle highlight"></div></div>
-        <div class="tl-card highlight">
-          <div class="tl-name-row"><span class="tl-emoji">🌋</span><span class="tl-name">別府地獄巡禮</span></div>
-          <div class="tl-desc">必看：海地獄（藍）＋血池地獄（紅）＋坊主地獄。推車可進！溫泉蛋＋布丁必吃</div>
-          <span class="tl-badge">各¥600–700</span>
-          <a class="map-btn" href="https://maps.google.com/?q=別府地獄めぐり" target="_blank">📍 開啟導航</a>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-time">16:00</div>
-        <div class="tl-dot"><div class="tl-dot-circle"></div></div>
-        <div class="tl-card">
-          <div class="tl-name-row"><span class="tl-emoji">🚗</span><span class="tl-name">開車回福岡</span></div>
-          <div class="tl-desc">別府 → 福岡，高速約1.5小時</div>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-time">17:30</div>
-        <div class="tl-dot"><div class="tl-dot-circle highlight"></div></div>
-        <div class="tl-card highlight">
-          <div class="tl-name-row"><span class="tl-emoji">🤖</span><span class="tl-name">LALAPORT 福岡・鋼彈！</span></div>
-          <div class="tl-desc">1:1巨型RX-93v高達立像！每小時整點有光效演出，整點前到場等候</div>
-          <span class="tl-badge gold-badge">🎬 整點光效演出</span>
-          <div class="tl-desc" style="margin-top:6px">順逛：Akachan本舖、Toys"R"Us、樂高、Moff Animal Cafe。美食街晚餐座位寬敞可停推車！</div>
-          <a class="map-btn" href="https://maps.google.com/?q=LaLaport福岡" target="_blank">📍 開啟導航</a>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-time">20:30</div>
-        <div class="tl-dot"><div class="tl-dot-circle"></div></div>
-        <div class="tl-card">
-          <div class="tl-name-row"><span class="tl-emoji">🚗</span><span class="tl-name">還車・回飯店</span></div>
-          <div class="tl-desc">確認還車地點和時間</div>
-        </div>
-      </div>
+      <a class="map-btn ol" href="https://maps.google.com/?q=MaxValu博多祇園店" target="_blank">📍 導航</a>
     </div>
   </div>
-
-  <div class="day-content" id="day6" style="display:none">
-    <div class="day-header">
-      <div class="day-num">Day 7</div>
-      <div class="day-title">🛍️ 純天神逛街日<br>舞鶴公園・ShinShin・掃貨</div>
-      <div class="day-date">2026年5月29日（五）</div>
-    </div>
-    <div class="timeline">
-      <div class="tl-item">
-        <div class="tl-time">08:30</div>
-        <div class="tl-dot"><div class="tl-dot-circle"></div></div>
-        <div class="tl-card plain">
-          <div class="tl-name-row"><span class="tl-emoji">🥐</span><span class="tl-name">早餐｜Full Full天神 / 上島珈琲</span></div>
-          <div class="tl-desc">明太子麵包或手沖咖啡＋吐司，天神地下街，不排隊</div>
-          <a class="map-btn outline" href="https://maps.google.com/?q=Full+Full+天神" target="_blank">📍 Full Full</a>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-time">09:30</div>
-        <div class="tl-dot"><div class="tl-dot-circle"></div></div>
-        <div class="tl-card">
-          <div class="tl-name-row"><span class="tl-emoji">🌳</span><span class="tl-name">舞鶴公園晨間散步</span></div>
-          <div class="tl-desc">大草皮廣場讓寶寶爬行放電！推車友善</div>
-          <a class="map-btn outline" href="https://maps.google.com/?q=舞鶴公園福岡" target="_blank">📍 導航</a>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-time">10:30</div>
-        <div class="tl-dot"><div class="tl-dot-circle"></div></div>
-        <div class="tl-card">
-          <div class="tl-name-row"><span class="tl-emoji">🏬</span><span class="tl-name">天神百貨掃貨</span></div>
-          <div class="tl-desc">岩田屋、三越、SOLARIA PLAZA（室內連通不怕雨）BEAMS、UNITED ARROWS</div>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-time">12:00</div>
-        <div class="tl-dot"><div class="tl-dot-circle highlight"></div></div>
-        <div class="tl-card highlight">
-          <div class="tl-name-row"><span class="tl-emoji">🍜</span><span class="tl-name">午餐｜ShinShin 拉麵 天神本店</span></div>
-          <div class="tl-desc">博多豚骨名店！湯頭清爽不油膩，翻桌快</div>
-          <a class="map-btn" href="https://maps.google.com/?q=ShinShin拉麵天神" target="_blank">📍 開啟導航</a>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-time">13:30</div>
-        <div class="tl-dot"><div class="tl-dot-circle"></div></div>
-        <div class="tl-card">
-          <div class="tl-name-row"><span class="tl-emoji">🛍️</span><span class="tl-name">天神地下街 600公尺！</span></div>
-          <div class="tl-desc">THANKYOUMART（¥390均一）、新天町商店街、THE天神伴手禮</div>
-          <div class="meal-strip">
-            <span class="meal-tag">🐣 努努雞</span>
-            <span class="meal-tag">🍡 博多通饅頭</span>
-            <span class="meal-tag">🍘 二○加煎餅</span>
-            <span class="meal-tag">💊 松本清</span>
-          </div>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-time">18:30</div>
-        <div class="tl-dot"><div class="tl-dot-circle highlight"></div></div>
-        <div class="tl-card highlight">
-          <div class="tl-name-row"><span class="tl-emoji">🍽️</span><span class="tl-name">晚餐｜自由選擇</span></div>
-          <div class="tl-desc">① 博多牛腸鍋 大山 PARCO B1（需訂位）<br>② ShinShin 本店<br>③ 糸島食堂 PARCO（海鮮蓋飯）</div>
-          <a class="map-btn outline" href="https://maps.google.com/?q=博多牛腸鍋大山天神PARCO" target="_blank">📍 大山</a>
-        </div>
+</div>
+<!-- 必吃圖卡 D1 -->
+<div class="food-section">
+  <div class="food-section-title">🍽️ D1 必吃必喝</div>
+  <div class="food-grid">
+    <div class="food-card">
+      <div class="food-card-emoji">🍢</div>
+      <div class="food-card-body">
+        <div class="food-card-name">かわ屋 雞皮串燒</div>
+        <div class="food-card-sub">博多名物！雞脖子皮6天醃製，外酥內Q彈</div>
+        <span class="food-card-time">⏰ 17:00–01:00</span>
+        <span class="food-card-price">¥143/串起</span><br>
+        <a class="food-card-map" href="https://maps.google.com/?q=博多かわ屋祇園町2-8" target="_blank">📍 祇園町2-8</a>
       </div>
     </div>
-  </div>
-
-  <div class="day-content" id="day7" style="display:none">
-    <div class="day-header">
-      <div class="day-num">Day 8</div>
-      <div class="day-title">✈️ 博多站最後採買<br>搭機回台灣！</div>
-      <div class="day-date">2026年5月30日（六）BR105 12:20</div>
-    </div>
-    <div class="alert" style="margin:16px 16px 0">💡 伴手禮在市區買好！機場人潮超多容易趕不上飛機！</div>
-    <div class="timeline">
-      <div class="tl-item">
-        <div class="tl-time">07:00</div>
-        <div class="tl-dot"><div class="tl-dot-circle"></div></div>
-        <div class="tl-card plain">
-          <div class="tl-name-row"><span class="tl-emoji">🌅</span><span class="tl-name">起床 + 打包行李</span></div>
-          <div class="tl-desc">確認護照、票券，打包整理</div>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-time">08:00</div>
-        <div class="tl-dot"><div class="tl-dot-circle highlight"></div></div>
-        <div class="tl-card highlight">
-          <div class="tl-name-row"><span class="tl-emoji">🛍️</span><span class="tl-name">博多站最後衝刺</span></div>
-          <div class="tl-desc">博多阪急B1（早餐咖啡）、JR博多城KITTE（伴手禮集中地）</div>
-          <div class="meal-strip">
-            <span class="meal-tag">🍘 福太郎仙貝</span>
-            <span class="meal-tag">🐤 小雞饅頭</span>
-            <span class="meal-tag">🥮 博多通饅頭</span>
-            <span class="meal-tag">🍡 二○加煎餅</span>
-            <span class="meal-tag">🥣 明太子</span>
-          </div>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-time">09:30</div>
-        <div class="tl-dot"><div class="tl-dot-circle"></div></div>
-        <div class="tl-card">
-          <div class="tl-name-row"><span class="tl-emoji">🚇</span><span class="tl-name">地鐵前往機場</span></div>
-          <div class="tl-desc">博多站 → 福岡空港，5分鐘，¥260</div>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-time">09:45</div>
-        <div class="tl-dot"><div class="tl-dot-circle"></div></div>
-        <div class="tl-card">
-          <div class="tl-name-row"><span class="tl-emoji">🛂</span><span class="tl-name">報到 + 安檢 + 免稅店</span></div>
-          <div class="tl-desc">早點報到！免稅店補不到的</div>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-time">12:20</div>
-        <div class="tl-dot"><div class="tl-dot-circle highlight"></div></div>
-        <div class="tl-card highlight">
-          <div class="tl-name-row"><span class="tl-emoji">✈️</span><span class="tl-name">長榮 BR105 起飛！</span></div>
-          <div class="tl-desc">福岡 → 桃園 13:45抵達。帶著滿滿的美好回憶回家 🏠</div>
-          <span class="tl-badge">回程</span>
-        </div>
+    <div class="food-card">
+      <div class="food-card-emoji">🍺</div>
+      <div class="food-card-body">
+        <div class="food-card-name">MaxValu 消夜採購</div>
+        <div class="food-card-sub">啤酒、清酒、零食、寶寶用品全補齊</div>
+        <span class="food-card-time">⏰ 07:00–23:00</span>
+        <span class="food-card-price">自由消費</span><br>
+        <a class="food-card-map" href="https://maps.google.com/?q=MaxValu博多祇園" target="_blank">📍 祇園店</a>
       </div>
     </div>
   </div>
 </div>
+</div>
+
+<!-- ===== DAY 2 ===== -->
+<div class="day-content" id="day1" style="display:none">
+<div class="day-header">
+  <div class="day-num">Day 2</div>
+  <div class="day-title">🚂 由布院之森<br>花卉村・COMICO・湯之坪</div>
+  <div class="day-date">2026年5月24日（日）</div>
+</div>
+<div class="timeline">
+  <div class="tl-item">
+    <div class="tl-time">07:30</div>
+    <div class="tl-dot"><div class="tl-dot-circle"></div></div>
+    <div class="tl-card plain">
+      <div class="tl-nr"><span class="tl-emoji">🥐</span><span class="tl-name">早餐｜博多站內外 3 選（不排隊，可帶上列車）</span></div>
+      <div class="alert">📌 BOUL'ANGE（博多駅前2-20-1）距離博多口約徒步5分，稍遠。<br>更推薦以下站內/站旁選項，買好直接上車吃！</div>
+      <div class="cafe-options">
+        <div class="cafe-opt">
+          <strong>① 喜水丸 博多一番街店（JR博多站構內）</strong>
+          朝食定食7:30開始，明太子＋高菜吃到飽，¥690起。直接在站內搞定！<br>
+          <a href="https://maps.google.com/?q=喜水丸博多一番街" target="_blank" style="color:var(--red);font-size:11px">📍 博多一番街</a>
+        </div>
+        <div class="cafe-opt">
+          <strong>② 博多站AMU PLAZA 地下 牛かつ・麵包・便利商店</strong>
+          アミュプラザ地下B1，多家選擇，帶著走最方便
+        </div>
+        <div class="cafe-opt">
+          <strong>③ 由布院之森 列車便當</strong>
+          可於博多站購買「ゆふいんの森弁当」¥1,350，在列車上邊看風景邊享用，超推！
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-time">09:17</div>
+    <div class="tl-dot"><div class="tl-dot-circle h"></div></div>
+    <div class="tl-card h">
+      <div class="tl-nr"><span class="tl-emoji">🚂</span><span class="tl-name">由布院之森 1號 出發</span></div>
+      <div class="tl-desc">博多 → 由布院，11:31抵達。車上有吧台，可買咖啡、甜點享用</div>
+      <span class="badge">⚠️ 已預訂</span><span class="badge">¥4,400/人</span>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-time">11:31</div>
+    <div class="tl-dot"><div class="tl-dot-circle"></div></div>
+    <div class="tl-card">
+      <div class="tl-nr"><span class="tl-emoji">📦</span><span class="tl-name">行李寄放 由布院站置物櫃</span></div>
+      <div class="tl-desc">輕裝出發，推推車逛街超輕鬆</div>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-time">11:45</div>
+    <div class="tl-dot"><div class="tl-dot-circle h"></div></div>
+    <div class="tl-card h">
+      <div class="tl-nr"><span class="tl-emoji">🌸</span><span class="tl-name">湯布院花卉村（Floral Village）</span></div>
+      <div class="tl-desc">英國科茲窩風情！小村莊內有貓頭鷹之森（可近距離互動）、玫瑰雜貨店，親子超好拍。徒步由布院站約15分或計程車5分</div>
+      <span class="badge gr">免費入園</span><span class="badge">9:30–17:00</span>
+      <a class="map-btn" href="https://maps.google.com/?q=湯布院フローラルヴィレッジ大分県由布市湯布院町川上1503-3" target="_blank">📍 開啟導航</a>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-time">13:00</div>
+    <div class="tl-dot"><div class="tl-dot-circle h"></div></div>
+    <div class="tl-card h">
+      <div class="tl-nr"><span class="tl-emoji">🎨</span><span class="tl-name">COMICO ART MUSEUM YUFUIN</span></div>
+      <div class="tl-desc">隈研吾設計的現代美術館！村上隆、草間彌生、奈良美智等7位大師46件作品，由布岳為背景超美。⚠️需事先線上預約（可省¥200），每隔週三公休，5/24週日✅</div>
+      <span class="badge">⚠️ 需線上預約</span><span class="badge">¥1,700（線上¥1,500）</span><span class="badge">9:30–17:00</span>
+      <a class="map-btn" href="https://maps.google.com/?q=COMICO+ART+MUSEUM+YUFUIN大分県由布市湯布院町川上2995-1" target="_blank">📍 開啟導航</a>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-time">14:30</div>
+    <div class="tl-dot"><div class="tl-dot-circle h"></div></div>
+    <div class="tl-card h">
+      <div class="tl-nr"><span class="tl-emoji">🛍️</span><span class="tl-name">湯之坪街道邊走邊吃（午餐）</span></div>
+      <div class="alert">💡 B SPEAK 開賣即售完！到站後第一件事去排，或COMICO後繞過來</div>
+      <div class="meal-strip">
+        <span class="meal-tag">🍰 B SPEAK 蛋糕捲</span>
+        <span class="meal-tag">🐰 Miffy麵包</span>
+        <span class="meal-tag">🍮 花麴菊家布丁銅鑼燒</span>
+        <span class="meal-tag">🥮 鞠智銅鑼燒</span>
+        <span class="meal-tag">🥔 金賞可樂餅</span>
+        <span class="meal-tag">🍯 Milch布丁＋起司蛋糕</span>
+        <span class="meal-tag">🍗 吉吾炸雞</span>
+      </div>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-time">15:30</div>
+    <div class="tl-dot"><div class="tl-dot-circle"></div></div>
+    <div class="tl-card">
+      <div class="tl-nr"><span class="tl-emoji">🦢</span><span class="tl-name">金鱗湖散步</span></div>
+      <div class="tl-desc">湖畔平坦推車好走！水上鳥居超美，下午逆光更有感</div>
+      <a class="map-btn ol" href="https://maps.google.com/?q=金鱗湖由布院" target="_blank">📍 導航</a>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-time">16:00</div>
+    <div class="tl-dot"><div class="tl-dot-circle"></div></div>
+    <div class="tl-card">
+      <div class="tl-nr"><span class="tl-emoji">🏠</span><span class="tl-name">Check-in 世紡 YOTSUMUGI</span></div>
+      <div class="tl-desc">包棟溫泉民宿，可帶寶寶一起泡湯！</div>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-time">17:30</div>
+    <div class="tl-dot"><div class="tl-dot-circle h"></div></div>
+    <div class="tl-card h">
+      <div class="tl-nr"><span class="tl-emoji">🍚</span><span class="tl-name">晚餐｜由布MABUSHI心 站前店</span></div>
+      <div class="tl-desc">豐後牛釜飯一飯三吃！原味→柚子胡椒→茶泡飯</div>
+      <span class="badge">⚠️ 已預訂 17:30</span>
+      <a class="map-btn" href="https://maps.google.com/?q=由布まぶし心站前店由布院" target="_blank">📍 開啟導航</a>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-time">19:30</div>
+    <div class="tl-dot"><div class="tl-dot-circle g"></div></div>
+    <div class="tl-card g">
+      <div class="tl-nr"><span class="tl-emoji">🛒</span><span class="tl-name">消夜採購｜AEON MaxValu 湯布院</span></div>
+      <div class="tl-desc">由布院最晚23:00關門！對面有黑色限定7-Eleven可打卡</div>
+      <div class="meal-strip">
+        <span class="meal-tag">🍺 大分地產啤酒</span>
+        <span class="meal-tag">🥃 九州焼酎</span>
+        <span class="meal-tag">🍓 在地新鮮水果</span>
+        <span class="meal-tag">🥚 溫泉蒸蛋</span>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 必吃圖卡 D2 湯之坪街道 -->
+<div class="food-section">
+  <div class="food-section-title">🍡 湯之坪街道 必吃必喝地圖</div>
+  <div class="food-grid">
+    <div class="food-card">
+      <div class="food-card-emoji">🍰</div>
+      <div class="food-card-body">
+        <div class="food-card-name">B SPEAK 蛋糕捲</div>
+        <div class="food-card-sub">由布院No.1！奶油蛋糕捲，開賣即售完，到站就去排</div>
+        <span class="food-card-time">⏰ 10:00–17:00</span>
+        <span class="food-card-price">¥1,620/條</span><br>
+        <a class="food-card-map" href="https://maps.google.com/?q=B+SPEAK由布院川上3040-2" target="_blank">📍 川上3040-2</a>
+      </div>
+    </div>
+    <div class="food-card">
+      <div class="food-card-emoji">🍯</div>
+      <div class="food-card-body">
+        <div class="food-card-name">Milch 布丁＋半熟起司蛋糕</div>
+        <div class="food-card-sub">100%由布院牛乳製！布丁瓶超可愛，世界品質金賞</div>
+        <span class="food-card-time">⏰ 10:30–17:30</span>
+        <span class="food-card-price">¥400–600</span><br>
+        <a class="food-card-map" href="https://maps.google.com/?q=由布院Milch川上3015-1" target="_blank">📍 川上3015-1</a>
+      </div>
+    </div>
+    <div class="food-card">
+      <div class="food-card-emoji">🥮</div>
+      <div class="food-card-body">
+        <div class="food-card-name">鞠智 cucuchi 銅鑼燒</div>
+        <div class="food-card-sub">現做3倍厚鬆餅皮！只有由布院一家，附設咖啡廳</div>
+        <span class="food-card-time">⏰ 10:00–17:00</span>
+        <span class="food-card-price">¥280起</span><br>
+        <a class="food-card-map" href="https://maps.google.com/?q=鞠智cucuchi由布院川上3001-1" target="_blank">📍 川上3001-1</a>
+      </div>
+    </div>
+    <div class="food-card">
+      <div class="food-card-emoji">🥔</div>
+      <div class="food-card-body">
+        <div class="food-card-name">金賞可樂餅 本店</div>
+        <div class="food-card-sub">全國大賽金賞！外酥內軟，招牌＋芝士口味必試</div>
+        <span class="food-card-time">⏰ 09:00–17:30</span>
+        <span class="food-card-price">¥200起</span><br>
+        <a class="food-card-map" href="https://maps.google.com/?q=由布院金賞コロッケ川上1481-7" target="_blank">📍 川上1481-7</a>
+      </div>
+    </div>
+    <div class="food-card">
+      <div class="food-card-emoji">🍮</div>
+      <div class="food-card-body">
+        <div class="food-card-name">花麴菊家 布丁銅鑼燒</div>
+        <div class="food-card-sub">冰涼布丁夾入鬆軟銅鑼燒，夏天超療癒！</div>
+        <span class="food-card-time">⏰ 09:00–18:00</span>
+        <span class="food-card-price">¥250</span><br>
+        <a class="food-card-map" href="https://maps.google.com/?q=花麴菊家由布院川上1524-1" target="_blank">📍 川上1524-1</a>
+      </div>
+    </div>
+    <div class="food-card">
+      <div class="food-card-emoji">🍗</div>
+      <div class="food-card-body">
+        <div class="food-card-name">吉吾 中津炸雞</div>
+        <div class="food-card-sub">現點現炸！雞腿肉多汁，柚子胡椒口味限定超香</div>
+        <span class="food-card-time">⏰ 10:30–16:45</span>
+        <span class="food-card-price">¥500/3塊</span><br>
+        <a class="food-card-map" href="https://maps.google.com/?q=中津からあげ吉吾湯布院川上1100-8" target="_blank">📍 川上1100-8</a>
+      </div>
+    </div>
+    <div class="food-card">
+      <div class="food-card-emoji">🐰</div>
+      <div class="food-card-body">
+        <div class="food-card-name">Miffy 森之廚房</div>
+        <div class="food-card-sub">米菲兔造型麵包，親子必拍！伴手禮超好買</div>
+        <span class="food-card-time">⏰ 10:00–17:00</span>
+        <span class="food-card-price">¥300起</span><br>
+        <a class="food-card-map" href="https://maps.google.com/?q=ミッフィー森の台所由布院川上1503-8" target="_blank">📍 川上1503-8</a>
+      </div>
+    </div>
+    <div class="food-card">
+      <div class="food-card-emoji">🎨</div>
+      <div class="food-card-body">
+        <div class="food-card-name">COMICO ART MUSEUM</div>
+        <div class="food-card-sub">隈研吾建築×草間彌生×奈良美智。需線上預約</div>
+        <span class="food-card-time">⏰ 9:30–17:00（隔週三休）</span>
+        <span class="food-card-price">¥1,700（線上¥1,500）</span><br>
+        <a class="food-card-map" href="https://maps.google.com/?q=COMICO+ART+MUSEUM+YUFUIN" target="_blank">📍 川上2995-1</a>
+      </div>
+    </div>
+  </div>
+  <div class="alert">🌸 花卉村（Floral Village）：免費入園，9:30–17:00，川上1503-3。貓頭鷹之森互動體驗有料</div>
+</div>
+</div>
+
+<!-- ===== DAY 3 ===== -->
+<div class="day-content" id="day2" style="display:none">
+<div class="day-header">
+  <div class="day-num">Day 3</div>
+  <div class="day-title">🌅 溫泉早晨<br>→回福岡・天神咖啡・中洲屋台</div>
+  <div class="day-date">2026年5月25日（一）</div>
+</div>
+<div class="timeline">
+  <div class="tl-item">
+    <div class="tl-time">08:00</div>
+    <div class="tl-dot"><div class="tl-dot-circle"></div></div>
+    <div class="tl-card plain">
+      <div class="tl-nr"><span class="tl-emoji">♨️</span><span class="tl-name">民宿早晨・泡湯・吃早餐</span></div>
+      <div class="tl-desc">包棟民宿的早晨，不用趕，慢慢泡個早湯。11點前退房</div>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-time">09:30</div>
+    <div class="tl-dot"><div class="tl-dot-circle"></div></div>
+    <div class="tl-card">
+      <div class="tl-nr"><span class="tl-emoji">🛍️</span><span class="tl-name">再逛湯之坪街道</span></div>
+      <div class="tl-desc">補昨天沒買到的！最後掃伴手禮</div>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-time">11:00</div>
+    <div class="tl-dot"><div class="tl-dot-circle h"></div></div>
+    <div class="tl-card h">
+      <div class="tl-nr"><span class="tl-emoji">🍱</span><span class="tl-name">午餐｜由布院車站周邊推薦</span></div>
+      <div class="tl-desc">以下3選：</div>
+      <div class="cafe-options">
+        <div class="cafe-opt">
+          <strong>① 由布院岳庵（金鱗湖旁老屋）</strong>
+          懷石定食風，¥2,500起。金鱗湖旁，氣氛最佳<br>
+          <a href="https://maps.google.com/?q=由布院岳庵" target="_blank" style="color:var(--red);font-size:11px">📍 導航</a>
+        </div>
+        <div class="cafe-opt">
+          <strong>② 手打蕎麥麵 泉（金鱗湖畔）</strong>
+          清爽日式，冷熱麵皆有，寶寶可吃烏龍麵<br>
+          <a href="https://maps.google.com/?q=手打そば泉由布院" target="_blank" style="color:var(--red);font-size:11px">📍 導航</a>
+        </div>
+        <div class="cafe-opt">
+          <strong>③ 鞠智 cucuchi Cafe（湯之坪街道）</strong>
+          咖啡廳午餐輕食，邊吃邊買銅鑼燒，推車可進<br>
+          <a href="https://maps.google.com/?q=鞠智cucuchi由布院川上3001-1" target="_blank" style="color:var(--red);font-size:11px">📍 導航</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-time">12:30</div>
+    <div class="tl-dot"><div class="tl-dot-circle"></div></div>
+    <div class="tl-card">
+      <div class="tl-nr"><span class="tl-emoji">🚃</span><span class="tl-name">JR普通列車回博多</span></div>
+      <div class="tl-desc">由布院 → 博多，約2小時，¥1,860/人。兩家庭各自check-in</div>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-time">15:00</div>
+    <div class="tl-dot"><div class="tl-dot-circle"></div></div>
+    <div class="tl-card">
+      <div class="tl-nr"><span class="tl-emoji">🏨</span><span class="tl-name">各自飯店 Check-in</span></div>
+      <div class="tl-desc">家庭A：KOKO HOTEL Fukuoka Tenjin<br>家庭B：Hotel Vista Fukuoka Nakasu-Kawabata</div>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-time">16:00</div>
+    <div class="tl-dot"><div class="tl-dot-circle g"></div></div>
+    <div class="tl-card g">
+      <div class="tl-nr"><span class="tl-emoji">☕</span><span class="tl-name">下午茶｜天神・中洲 咖啡廳選擇</span></div>
+      <div class="cafe-options">
+        <div class="cafe-opt">
+          <strong>① FUK COFFEE 祇園店（旅行×咖啡主題）</strong>
+          機場風格超有趣！必點昭和布丁+香草冰淇淋，距中洲屋台近。地址：博多区祇園町6-22<br>
+          <a href="https://maps.google.com/?q=FUK+COFFEE+祇園福岡博多区祇園町6-22" target="_blank" style="color:var(--red);font-size:11px">📍 導航 ⏰ 08:00–20:00</a>
+        </div>
+        <div class="cafe-opt">
+          <strong>② Connect Coffee（天神・世界拉花冠軍）</strong>
+          拉花超美不忍喝！咖啡凍必吃。地址：天神5-6-13<br>
+          <a href="https://maps.google.com/?q=Connect+Coffee天神福岡中央区天神5-6-13" target="_blank" style="color:var(--red);font-size:11px">📍 導航 ⏰ 12:00–20:00（週二休）</a>
+        </div>
+        <div class="cafe-opt">
+          <strong>③ COFFEE COUNTY stock（西中洲）</strong>
+          在地精品烘焙品牌，與麵包店結合，可外帶至天神中央公園。地址：西中洲6-17<br>
+          <a href="https://maps.google.com/?q=COFFEE+COUNTY+stock西中洲福岡市" target="_blank" style="color:var(--red);font-size:11px">📍 導航 ⏰ 08:00–18:30（週一休）</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-time">17:30</div>
+    <div class="tl-dot"><div class="tl-dot-circle"></div></div>
+    <div class="tl-card">
+      <div class="tl-nr"><span class="tl-emoji">🛒</span><span class="tl-name">藥妝採買｜DONKI 中洲店</span></div>
+      <div class="tl-desc">24小時，藥妝零食日用品</div>
+      <a class="map-btn ol" href="https://maps.google.com/?q=ドンキホーテ中洲福岡" target="_blank">📍 導航</a>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-time">18:30</div>
+    <div class="tl-dot"><div class="tl-dot-circle h"></div></div>
+    <div class="tl-card h">
+      <div class="tl-nr"><span class="tl-emoji">🍢</span><span class="tl-name">晚餐｜中洲屋台體驗</span></div>
+      <div class="tl-desc">那珂川河畔，18:30出發卡位！推薦屋台司（明太子天婦羅）或KUROchan</div>
+      <span class="badge">⚠️ 現金Only</span>
+      <div class="alert">推車請收折放旁邊，座位小，選較寬敞攤位。¥3,000/人</div>
+      <div class="meal-strip">
+        <span class="meal-tag">🍜 博多拉麵</span>
+        <span class="meal-tag">🍢 烤雞皮串</span>
+        <span class="meal-tag">🥟 一口煎餃</span>
+        <span class="meal-tag">🥕 關東煮</span>
+        <span class="meal-tag">🍺 生啤酒</span>
+      </div>
+      <a class="map-btn" href="https://maps.google.com/?q=中洲屋台街福岡" target="_blank">📍 開啟導航</a>
+    </div>
+  </div>
+</div>
+<div class="food-section">
+  <div class="food-section-title">☕ D3 天神・中洲 咖啡選擇</div>
+  <div class="food-grid">
+    <div class="food-card">
+      <div class="food-card-emoji">✈️</div>
+      <div class="food-card-body">
+        <div class="food-card-name">FUK COFFEE 祇園店</div>
+        <div class="food-card-sub">旅行主題咖啡廳！昭和布丁+冰淇淋必點</div>
+        <span class="food-card-time">⏰ 08:00–20:00</span>
+        <span class="food-card-price">¥500–800</span><br>
+        <a class="food-card-map" href="https://maps.google.com/?q=FUK+COFFEE祇園町6-22" target="_blank">📍 祇園町6-22</a>
+      </div>
+    </div>
+    <div class="food-card">
+      <div class="food-card-emoji">🏆</div>
+      <div class="food-card-body">
+        <div class="food-card-name">Connect Coffee 天神</div>
+        <div class="food-card-sub">世界拉花冠軍開設！咖啡凍必吃</div>
+        <span class="food-card-time">⏰ 12:00–20:00（週二休）</span>
+        <span class="food-card-price">¥700–900</span><br>
+        <a class="food-card-map" href="https://maps.google.com/?q=Connect+Coffee天神5-6-13" target="_blank">📍 天神5-6-13</a>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ===== DAY 4 ===== -->
+<div class="day-content" id="day3" style="display:none">
+<div class="day-header">
+  <div class="day-num">Day 4</div>
+  <div class="day-title">⛩️ 早餐麵包→麵包超人<br>大濠公園→&amp;LOCALS→水炊</div>
+  <div class="day-date">2026年5月26日（二）</div>
+</div>
+<div class="timeline">
+  <div class="tl-item">
+    <div class="tl-time">08:00</div>
+    <div class="tl-dot"><div class="tl-dot-circle"></div></div>
+    <div class="tl-card plain">
+      <div class="tl-nr"><span class="tl-emoji">🥐</span><span class="tl-name">早餐｜THE FULL FULL 天神</span></div>
+      <div class="tl-desc">超人氣明太子奶油麵包！早8點到不排隊</div>
+      <a class="map-btn ol" href="https://maps.google.com/?q=Full+Full天神福岡" target="_blank">📍 導航</a>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-time">09:00</div>
+    <div class="tl-dot"><div class="tl-dot-circle"></div></div>
+    <div class="tl-card">
+      <div class="tl-nr"><span class="tl-emoji">⛩️</span><span class="tl-name">櫛田神社</span></div>
+      <div class="tl-desc">博多總鎮守！山笠神轎超震撼，免費參拜，推車好走</div>
+      <a class="map-btn ol" href="https://maps.google.com/?q=櫛田神社福岡市博多区" target="_blank">📍 導航</a>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-time">09:30</div>
+    <div class="tl-dot"><div class="tl-dot-circle"></div></div>
+    <div class="tl-card">
+      <div class="tl-nr"><span class="tl-emoji">🛍️</span><span class="tl-name">上川端商店街</span></div>
+      <div class="tl-desc">博多最老商店街，特色小店伴手禮</div>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-time">10:30</div>
+    <div class="tl-dot"><div class="tl-dot-circle h"></div></div>
+    <div class="tl-card h">
+      <div class="tl-nr"><span class="tl-emoji">🍞</span><span class="tl-name">麵包超人兒童博物館</span></div>
+      <div class="tl-desc">博多Riverain Mall 5-6F，全室內！角色見面會＋遊樂設施，含麵包超人餐廳午餐</div>
+      <span class="badge">幼兒¥500</span><span class="badge">1歲以下免費</span><span class="badge">10:00–17:00</span>
+      <a class="map-btn" href="https://maps.google.com/?q=福岡麵包超人兒童博物館博多Riverain" target="_blank">📍 開啟導航</a>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-time">13:30</div>
+    <div class="tl-dot"><div class="tl-dot-circle"></div></div>
+    <div class="tl-card">
+      <div class="tl-nr"><span class="tl-emoji">🌳</span><span class="tl-name">大濠公園</span></div>
+      <div class="tl-desc">推車友善！兒童遊樂區讓寶寶放電，環湖步道，草皮適合爬行</div>
+      <a class="map-btn ol" href="https://maps.google.com/?q=大濠公園福岡市中央区" target="_blank">📍 導航</a>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-time">15:30</div>
+    <div class="tl-dot"><div class="tl-dot-circle g"></div></div>
+    <div class="tl-card g">
+      <div class="tl-nr"><span class="tl-emoji">🍵</span><span class="tl-name">下午茶｜&amp;LOCALS 大濠公園</span></div>
+      <div class="tl-desc">木造建築全面落地窗，主打八女茶！玉子燒御膳、旅するおいなり、八女茶霜淇淋。兼選物店可買伴手禮</div>
+      <span class="badge gr">✅ 週二開店</span><span class="badge">9:00–18:30</span>
+      <a class="map-btn" href="https://maps.google.com/?q=LOCALS大濠公園福岡市中央区大濠公園1-9" target="_blank">📍 開啟導航</a>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-time">17:00</div>
+    <div class="tl-dot"><div class="tl-dot-circle h"></div></div>
+    <div class="tl-card h">
+      <div class="tl-nr"><span class="tl-emoji">🍲</span><span class="tl-name">晚餐｜MIZUTAKI DAIDAI 水炊だいだい</span></div>
+      <div class="tl-desc">博多水炊雞肉鍋，親子友善</div>
+      <span class="badge">⚠️ 已預訂 17:00</span>
+      <a class="map-btn" href="https://maps.google.com/?q=MIZUTAKI+DAIDAI+水炊福岡" target="_blank">📍 開啟導航</a>
+    </div>
+  </div>
+</div>
+<div class="food-section">
+  <div class="food-section-title">🍽️ D4 必吃必喝</div>
+  <div class="food-grid">
+    <div class="food-card">
+      <div class="food-card-emoji">🥐</div>
+      <div class="food-card-body">
+        <div class="food-card-name">Full Full 明太子麵包</div>
+        <div class="food-card-sub">天神超人氣！明太子奶油麵包，早8點到不排隊</div>
+        <span class="food-card-time">⏰ 08:00–20:00</span>
+        <span class="food-card-price">¥200–400</span><br>
+        <a class="food-card-map" href="https://maps.google.com/?q=Full+Full天神福岡" target="_blank">📍 天神</a>
+      </div>
+    </div>
+    <div class="food-card">
+      <div class="food-card-emoji">🍵</div>
+      <div class="food-card-body">
+        <div class="food-card-name">&amp;LOCALS 八女茶咖啡廳</div>
+        <div class="food-card-sub">玉子燒御膳＋八女茶霜淇淋，大濠公園景觀</div>
+        <span class="food-card-time">⏰ 9:00–18:30（週一休）</span>
+        <span class="food-card-price">¥800–1,400</span><br>
+        <a class="food-card-map" href="https://maps.google.com/?q=LOCALS大濠公園1-9" target="_blank">📍 大濠公園1-9</a>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ===== DAY 5 ===== -->
+<div class="day-content" id="day4" style="display:none">
+<div class="day-header">
+  <div class="day-num">Day 5</div>
+  <div class="day-title">🎋 太宰府・一蘭合格<br>天神大名掃街・燒肉上</div>
+  <div class="day-date">2026年5月27日（三）</div>
+</div>
+<div class="timeline">
+  <div class="tl-item">
+    <div class="tl-time">08:00</div>
+    <div class="tl-dot"><div class="tl-dot-circle"></div></div>
+    <div class="tl-card plain">
+      <div class="tl-nr"><span class="tl-emoji">🍳</span><span class="tl-name">早餐｜3 選（依飯店位置選擇）</span></div>
+      <div class="cafe-options">
+        <div class="cafe-opt">
+          <strong>① 炉端ノいとおかし（六本松）</strong>
+          現烤鮭魚定食×土鍋炊飯，每天8點開始，需事先預約。往西鐵天神可接上太宰府線<br>
+          <a href="https://maps.google.com/?q=炉端いとおかし福岡六本松" target="_blank" style="color:var(--red);font-size:11px">📍 六本松（搭地鐵至天神站）</a>
+        </div>
+        <div class="cafe-opt">
+          <strong>② 上島珈琲 天神地下街店（隨到隨坐）</strong>
+          法蘭絨手沖咖啡＋厚吐司，就在天神地下街，位置最方便
+          <a href="https://maps.google.com/?q=上島珈琲天神地下街" target="_blank" style="color:var(--red);font-size:11px">📍 天神地下街</a>
+        </div>
+        <div class="cafe-opt">
+          <strong>③ Full Full 天神（早8點不排隊）</strong>
+          昨天喜歡就再來，明太子麵包帶著走，邊走邊吃去西鐵天神站
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-time">09:00</div>
+    <div class="tl-dot"><div class="tl-dot-circle"></div></div>
+    <div class="tl-card">
+      <div class="tl-nr"><span class="tl-emoji">🚃</span><span class="tl-name">西鐵前往太宰府</span></div>
+      <div class="tl-desc">天神 → 二日市（轉乘） → 太宰府，約40分，¥420/人</div>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-time">10:00</div>
+    <div class="tl-dot"><div class="tl-dot-circle"></div></div>
+    <div class="tl-card">
+      <div class="tl-nr"><span class="tl-emoji">⛩️</span><span class="tl-name">太宰府天滿宮</span></div>
+      <div class="tl-desc">學問之神！梅枝餅現烤必吃，境內平坦推車好走</div>
+      <a class="map-btn ol" href="https://maps.google.com/?q=太宰府天満宮" target="_blank">📍 導航</a>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-time">11:00</div>
+    <div class="tl-dot"><div class="tl-dot-circle h"></div></div>
+    <div class="tl-card h">
+      <div class="tl-nr"><span class="tl-emoji">🍜</span><span class="tl-name">午餐｜一蘭太宰府參道店（合格拉麵）</span></div>
+      <div class="tl-desc">全球唯一五角碗！合格套餐¥1,410。帶推車店員貼心幫忙挪空間</div>
+      <span class="badge">⚠️ 11:00前到抽號</span><span class="badge">五角碗限定</span>
+      <a class="map-btn" href="https://maps.google.com/?q=一蘭太宰府参道店太宰府市宰府2-6-2" target="_blank">📍 開啟導航</a>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-time">12:30</div>
+    <div class="tl-dot"><div class="tl-dot-circle"></div></div>
+    <div class="tl-card">
+      <div class="tl-nr"><span class="tl-emoji">🚃</span><span class="tl-name">西鐵回天神</span></div>
+      <div class="tl-desc">¥420/人</div>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-time">13:30</div>
+    <div class="tl-dot"><div class="tl-dot-circle"></div></div>
+    <div class="tl-card">
+      <div class="tl-nr"><span class="tl-emoji">🛍️</span><span class="tl-name">天神→大名→往藥院方向逛街</span></div>
+      <div class="meal-strip">
+        <span class="meal-tag">👟 Supreme九州唯一</span>
+        <span class="meal-tag">👕 Human Made</span>
+        <span class="meal-tag">🐱 CHIIKAWA LAND</span>
+        <span class="meal-tag">👶 GU嬰兒款</span>
+        <span class="meal-tag">💊 松本清</span>
+      </div>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-time">16:30</div>
+    <div class="tl-dot"><div class="tl-dot-circle g"></div></div>
+    <div class="tl-card g">
+      <div class="tl-nr"><span class="tl-emoji">☕</span><span class="tl-name">下午咖啡｜藥院 Abeki</span></div>
+      <div class="tl-desc">無招牌隱密神店！白巧克力起司蛋糕＋手沖，安靜療癒，藥院大通站步行約5分</div>
+      <a class="map-btn ol" href="https://maps.google.com/?q=Abeki薬院福岡市中央区" target="_blank">📍 導航</a>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-time">19:00</div>
+    <div class="tl-dot"><div class="tl-dot-circle h"></div></div>
+    <div class="tl-card h">
+      <div class="tl-nr"><span class="tl-emoji">🔥</span><span class="tl-name">晚餐｜YAKINIKU JO 燒肉上</span></div>
+      <div class="tl-desc">精選部位燒肉，肉質鮮嫩</div>
+      <span class="badge">⚠️ 已預訂 19:00</span>
+      <a class="map-btn" href="https://maps.google.com/?q=焼肉上福岡天神藥院" target="_blank">📍 開啟導航</a>
+    </div>
+  </div>
+</div>
+<div class="food-section">
+  <div class="food-section-title">🍽️ D5 必吃必喝</div>
+  <div class="food-grid">
+    <div class="food-card">
+      <div class="food-card-emoji">🍜</div>
+      <div class="food-card-body">
+        <div class="food-card-name">一蘭 合格拉麵</div>
+        <div class="food-card-sub">全球唯一五角碗！59cm合格麵，¥1,410含加麵</div>
+        <span class="food-card-time">⏰ 09:00–19:00</span>
+        <span class="food-card-price">¥1,410/套餐</span><br>
+        <a class="food-card-map" href="https://maps.google.com/?q=一蘭太宰府参道店宰府2-6-2" target="_blank">📍 宰府2-6-2</a>
+      </div>
+    </div>
+    <div class="food-card">
+      <div class="food-card-emoji">🍡</div>
+      <div class="food-card-body">
+        <div class="food-card-name">太宰府 梅枝餅</div>
+        <div class="food-card-sub">かさの家現烤最好吃！紅豆餡＋糯米皮，必吃</div>
+        <span class="food-card-time">⏰ 09:00–18:00</span>
+        <span class="food-card-price">¥160/個</span><br>
+        <a class="food-card-map" href="https://maps.google.com/?q=かさの家太宰府" target="_blank">📍 太宰府参道</a>
+      </div>
+    </div>
+    <div class="food-card">
+      <div class="food-card-emoji">☕</div>
+      <div class="food-card-body">
+        <div class="food-card-name">Abeki 隱密咖啡</div>
+        <div class="food-card-sub">無招牌！白巧克力起司蛋糕×手沖，藥院隱藏神店</div>
+        <span class="food-card-time">⏰ 13:00–18:00（不定休）</span>
+        <span class="food-card-price">¥600–900</span><br>
+        <a class="food-card-map" href="https://maps.google.com/?q=Abeki薬院福岡" target="_blank">📍 藥院</a>
+      </div>
+    </div>
+    <div class="food-card">
+      <div class="food-card-emoji">🔥</div>
+      <div class="food-card-body">
+        <div class="food-card-name">YAKINIKU JO 燒肉上</div>
+        <div class="food-card-sub">精選和牛部位，已預訂！帶寶寶確認嬰兒椅</div>
+        <span class="food-card-time">⏰ 已預訂 19:00</span>
+        <span class="food-card-price">¥5,000–8,000/人</span><br>
+        <a class="food-card-map" href="https://maps.google.com/?q=焼肉上福岡天神" target="_blank">📍 天神</a>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ===== DAY 6 ===== -->
+<div class="day-content" id="day5" style="display:none">
+<div class="day-header">
+  <div class="day-num">Day 6</div>
+  <div class="day-title">🚗 自駕日！九州動物園<br>別府地獄・LALAPORT鋼彈</div>
+  <div class="day-date">2026年5月28日（四）</div>
+</div>
+<div class="alert" style="margin:16px 16px 0">🚗 台灣駕照＋國際駕照都要帶！嬰兒安全座椅提前向AVIS預約！</div>
+<div class="timeline">
+  <div class="tl-item">
+    <div class="tl-time">07:00</div>
+    <div class="tl-dot"><div class="tl-dot-circle"></div></div>
+    <div class="tl-card plain">
+      <div class="tl-nr"><span class="tl-emoji">🍱</span><span class="tl-name">早餐｜便利商店快速解決</span></div>
+      <div class="tl-desc">今天行程滿，快速吃完準備取車</div>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-time">08:00</div>
+    <div class="tl-dot"><div class="tl-dot-circle h"></div></div>
+    <div class="tl-card h">
+      <div class="tl-nr"><span class="tl-emoji">🚗</span><span class="tl-name">取車｜AVIS Budget 吳服町店</span></div>
+      <span class="badge">⚠️ 已預訂 08:00</span>
+      <a class="map-btn" href="https://maps.google.com/?q=AVIS+Budget呉服町福岡市博多区" target="_blank">📍 開啟導航</a>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-time">09:00</div>
+    <div class="tl-dot"><div class="tl-dot-circle h"></div></div>
+    <div class="tl-card h">
+      <div class="tl-nr"><span class="tl-emoji">🦁</span><span class="tl-name">九州自然動物公園 AFRICA SAFARI</span></div>
+      <div class="tl-desc">自駕進動物區！車內直接看獅子老虎走過車旁，超安全刺激！車程約40分</div>
+      <span class="badge">幼兒免費</span><span class="badge">大人¥2,500</span>
+      <a class="map-btn" href="https://maps.google.com/?q=九州自然動物公園アフリカンサファリ" target="_blank">📍 開啟導航</a>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-time">12:00</div>
+    <div class="tl-dot"><div class="tl-dot-circle"></div></div>
+    <div class="tl-card">
+      <div class="tl-nr"><span class="tl-emoji">🍱</span><span class="tl-name">午餐｜動物園內或外帶野餐</span></div>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-time">13:30</div>
+    <div class="tl-dot"><div class="tl-dot-circle h"></div></div>
+    <div class="tl-card h">
+      <div class="tl-nr"><span class="tl-emoji">🌋</span><span class="tl-name">別府地獄巡禮</span></div>
+      <div class="tl-desc">海地獄（藍色）＋血池地獄（紅色）＋坊主地獄，推車可進！溫泉蛋＋布丁必吃</div>
+      <span class="badge">各¥600–700</span>
+      <a class="map-btn" href="https://maps.google.com/?q=別府地獄めぐり" target="_blank">📍 開啟導航</a>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-time">16:00</div>
+    <div class="tl-dot"><div class="tl-dot-circle"></div></div>
+    <div class="tl-card">
+      <div class="tl-nr"><span class="tl-emoji">🚗</span><span class="tl-name">開車回福岡（高速約1.5小時）</span></div>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-time">17:30</div>
+    <div class="tl-dot"><div class="tl-dot-circle h"></div></div>
+    <div class="tl-card h">
+      <div class="tl-nr"><span class="tl-emoji">🤖</span><span class="tl-name">LALAPORT 福岡・鋼彈！</span></div>
+      <div class="tl-desc">1:1巨型RX-93v高達！每小時整點光效演出，整點前到場等候。Akachan本舖、Toys"R"Us、Moff Animal Cafe，美食街晚餐</div>
+      <span class="badge gd">🎬 整點光效</span>
+      <a class="map-btn" href="https://maps.google.com/?q=LaLaport福岡" target="_blank">📍 開啟導航</a>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-time">20:30</div>
+    <div class="tl-dot"><div class="tl-dot-circle"></div></div>
+    <div class="tl-card">
+      <div class="tl-nr"><span class="tl-emoji">🚗</span><span class="tl-name">還車・回飯店</span></div>
+    </div>
+  </div>
+</div>
+<div class="food-section">
+  <div class="food-section-title">🍽️ D6 必體驗</div>
+  <div class="food-grid">
+    <div class="food-card">
+      <div class="food-card-emoji">🦁</div>
+      <div class="food-card-body">
+        <div class="food-card-name">九州自然動物公園</div>
+        <div class="food-card-sub">車窗外就是獅子！幼兒免費，大人¥2,500</div>
+        <span class="food-card-time">⏰ 09:00–16:30</span>
+        <span class="food-card-price">大人¥2,500</span><br>
+        <a class="food-card-map" href="https://maps.google.com/?q=九州自然動物公園" target="_blank">📍 宇佐市安心院</a>
+      </div>
+    </div>
+    <div class="food-card">
+      <div class="food-card-emoji">🌋</div>
+      <div class="food-card-body">
+        <div class="food-card-name">別府地獄巡禮</div>
+        <div class="food-card-sub">海地獄（藍）＋血池（紅），推車可進，溫泉蛋必吃</div>
+        <span class="food-card-time">⏰ 08:00–17:00</span>
+        <span class="food-card-price">¥600–700/處</span><br>
+        <a class="food-card-map" href="https://maps.google.com/?q=別府地獄めぐり" target="_blank">📍 別府市</a>
+      </div>
+    </div>
+    <div class="food-card">
+      <div class="food-card-emoji">🤖</div>
+      <div class="food-card-body">
+        <div class="food-card-name">LALAPORT 鋼彈</div>
+        <div class="food-card-sub">1:1高達！每整點光效演出，Akachan本舖採購</div>
+        <span class="food-card-time">⏰ 整點光效演出</span>
+        <span class="food-card-price">免費觀看</span><br>
+        <a class="food-card-map" href="https://maps.google.com/?q=LaLaport福岡" target="_blank">📍 福岡市博多区</a>
+      </div>
+    </div>
+    <div class="food-card">
+      <div class="food-card-emoji">🥚</div>
+      <div class="food-card-body">
+        <div class="food-card-name">別府 溫泉蛋＋布丁</div>
+        <div class="food-card-sub">地獄熱泉蒸製！海地獄旁現場購買，必吃</div>
+        <span class="food-card-time">⏰ 地獄巡禮時</span>
+        <span class="food-card-price">¥200–350</span><br>
+        <a class="food-card-map" href="https://maps.google.com/?q=海地獄別府" target="_blank">📍 海地獄旁</a>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ===== DAY 7 ===== -->
+<div class="day-content" id="day6" style="display:none">
+<div class="day-header">
+  <div class="day-num">Day 7</div>
+  <div class="day-title">🛍️ 純天神逛街日<br>舞鶴公園・ShinShin拉麵</div>
+  <div class="day-date">2026年5月29日（五）</div>
+</div>
+<div class="timeline">
+  <div class="tl-item">
+    <div class="tl-time">08:30</div>
+    <div class="tl-dot"><div class="tl-dot-circle"></div></div>
+    <div class="tl-card plain">
+      <div class="tl-nr"><span class="tl-emoji">🥐</span><span class="tl-name">早餐｜Full Full天神 / 上島珈琲 天神地下街</span></div>
+      <div class="tl-desc">不排隊，天神地下街隨到隨坐</div>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-time">09:30</div>
+    <div class="tl-dot"><div class="tl-dot-circle"></div></div>
+    <div class="tl-card">
+      <div class="tl-nr"><span class="tl-emoji">🌳</span><span class="tl-name">舞鶴公園晨間散步</span></div>
+      <div class="tl-desc">大草皮廣場，讓寶寶爬行放電，推車友善</div>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-time">10:30</div>
+    <div class="tl-dot"><div class="tl-dot-circle"></div></div>
+    <div class="tl-card">
+      <div class="tl-nr"><span class="tl-emoji">🏬</span><span class="tl-name">天神百貨掃貨</span></div>
+      <div class="tl-desc">岩田屋、三越、SOLARIA PLAZA（室內連通不怕雨）</div>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-time">12:00</div>
+    <div class="tl-dot"><div class="tl-dot-circle h"></div></div>
+    <div class="tl-card h">
+      <div class="tl-nr"><span class="tl-emoji">🍜</span><span class="tl-name">午餐｜ShinShin 拉麵 天神本店</span></div>
+      <div class="tl-desc">博多豚骨名店！湯頭清爽不油膩，翻桌快</div>
+      <a class="map-btn" href="https://maps.google.com/?q=ShinShin拉麵天神本店福岡" target="_blank">📍 開啟導航</a>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-time">13:30</div>
+    <div class="tl-dot"><div class="tl-dot-circle"></div></div>
+    <div class="tl-card">
+      <div class="tl-nr"><span class="tl-emoji">🛍️</span><span class="tl-name">天神地下街 600公尺！</span></div>
+      <div class="tl-desc">THANKYOUMART（¥390均一）、新天町商店街、THE天神伴手禮一次打包</div>
+      <div class="meal-strip">
+        <span class="meal-tag">🐣 努努雞</span>
+        <span class="meal-tag">🍡 博多通饅頭</span>
+        <span class="meal-tag">🍘 二○加煎餅</span>
+        <span class="meal-tag">💊 松本清補貨</span>
+      </div>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-time">18:30</div>
+    <div class="tl-dot"><div class="tl-dot-circle h"></div></div>
+    <div class="tl-card h">
+      <div class="tl-nr"><span class="tl-emoji">🍽️</span><span class="tl-name">晚餐｜自由選擇</span></div>
+      <div class="tl-desc">① 博多牛腸鍋 大山 PARCO B1（需訂位）<br>② ShinShin 再訪<br>③ 糸島食堂 PARCO（海鮮蓋飯）</div>
+    </div>
+  </div>
+</div>
+<div class="food-section">
+  <div class="food-section-title">🍽️ D7 福岡伴手禮採買清單</div>
+  <div class="food-grid">
+    <div class="food-card">
+      <div class="food-card-emoji">🍜</div>
+      <div class="food-card-body">
+        <div class="food-card-name">ShinShin 博多純情拉麵</div>
+        <div class="food-card-sub">博多豚骨名店，湯頭清爽，翻桌快不用等太久</div>
+        <span class="food-card-time">⏰ 11:00–24:00</span>
+        <span class="food-card-price">¥900起</span><br>
+        <a class="food-card-map" href="https://maps.google.com/?q=Shin-Shin天神本店福岡" target="_blank">📍 天神</a>
+      </div>
+    </div>
+    <div class="food-card">
+      <div class="food-card-emoji">🛍️</div>
+      <div class="food-card-body">
+        <div class="food-card-name">天神地下街 伴手禮</div>
+        <div class="food-card-sub">THANKYOUMART¥390均一、博多通饅頭、二○加煎餅</div>
+        <span class="food-card-time">⏰ 10:00–21:00</span>
+        <span class="food-card-price">¥390起</span><br>
+        <a class="food-card-map" href="https://maps.google.com/?q=天神地下街福岡市中央区天神2" target="_blank">📍 天神地下街</a>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ===== DAY 8 ===== -->
+<div class="day-content" id="day7" style="display:none">
+<div class="day-header">
+  <div class="day-num">Day 8</div>
+  <div class="day-title">✈️ 最後衝刺採買<br>回台灣！BR105 12:20</div>
+  <div class="day-date">2026年5月30日（六）</div>
+</div>
+<div class="alert" style="margin:16px 16px 0">💡 伴手禮在市區買好！機場人潮多，容易趕不上飛機！</div>
+<div class="timeline">
+  <div class="tl-item">
+    <div class="tl-time">07:00</div>
+    <div class="tl-dot"><div class="tl-dot-circle"></div></div>
+    <div class="tl-card plain">
+      <div class="tl-nr"><span class="tl-emoji">🌅</span><span class="tl-name">起床 + 打包行李</span></div>
+      <div class="tl-desc">確認護照、票券、所有行李</div>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-time">08:00</div>
+    <div class="tl-dot"><div class="tl-dot-circle h"></div></div>
+    <div class="tl-card h">
+      <div class="tl-nr"><span class="tl-emoji">🛍️</span><span class="tl-name">博多站最後衝刺</span></div>
+      <div class="tl-desc">博多阪急B1早餐麵包、JR博多城KITTE伴手禮</div>
+      <div class="meal-strip">
+        <span class="meal-tag">🍘 福太郎仙貝</span>
+        <span class="meal-tag">🐤 小雞饅頭</span>
+        <span class="meal-tag">🥮 博多通饅頭</span>
+        <span class="meal-tag">🍡 二○加煎餅</span>
+        <span class="meal-tag">🥣 明太子</span>
+      </div>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-time">09:30</div>
+    <div class="tl-dot"><div class="tl-dot-circle"></div></div>
+    <div class="tl-card">
+      <div class="tl-nr"><span class="tl-emoji">🚇</span><span class="tl-name">地鐵前往機場</span></div>
+      <div class="tl-desc">博多站 → 福岡空港，5分鐘，¥260</div>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-time">12:20</div>
+    <div class="tl-dot"><div class="tl-dot-circle h"></div></div>
+    <div class="tl-card h">
+      <div class="tl-nr"><span class="tl-emoji">✈️</span><span class="tl-name">長榮 BR105 起飛！</span></div>
+      <div class="tl-desc">福岡 → 桃園 13:45抵達。帶著滿滿美好回憶回家 🏠</div>
+      <span class="badge">回程</span>
+    </div>
+  </div>
+</div>
+<div class="food-section">
+  <div class="food-section-title">🎁 D8 最後伴手禮清單</div>
+  <div class="food-grid">
+    <div class="food-card">
+      <div class="food-card-emoji">🍘</div>
+      <div class="food-card-body">
+        <div class="food-card-name">福太郎 明太子仙貝</div>
+        <div class="food-card-sub">博多必買！明太子風味仙貝，最受歡迎伴手禮</div>
+        <span class="food-card-time">⏰ 博多阪急・KITTE</span>
+        <span class="food-card-price">¥700起</span>
+      </div>
+    </div>
+    <div class="food-card">
+      <div class="food-card-emoji">🐤</div>
+      <div class="food-card-body">
+        <div class="food-card-name">小雞饅頭（ひよ子）</div>
+        <div class="food-card-sub">博多名物！可愛小雞造型，白豆沙內餡</div>
+        <span class="food-card-time">⏰ 博多阪急・機場</span>
+        <span class="food-card-price">¥700起</span>
+      </div>
+    </div>
+    <div class="food-card">
+      <div class="food-card-emoji">🍡</div>
+      <div class="food-card-body">
+        <div class="food-card-name">二○加 煎餅</div>
+        <div class="food-card-sub">博多老鋪！醬油風味薄脆煎餅，多種口味</div>
+        <span class="food-card-time">⏰ 博多站內</span>
+        <span class="food-card-price">¥540起</span>
+      </div>
+    </div>
+    <div class="food-card">
+      <div class="food-card-emoji">🥣</div>
+      <div class="food-card-body">
+        <div class="food-card-name">博多 明太子</div>
+        <div class="food-card-sub">真正的博多明太子！建議買冷藏真空包，可帶回</div>
+        <span class="food-card-time">⏰ 博多阪急地下</span>
+        <span class="food-card-price">¥2,000起</span>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+</div><!-- end itinerary -->
 
 <!-- TRANSPORT -->
 <div id="transport" class="section">
-  <div class="sec-title">交通總覽</div>
-  <div class="transport-section">
-    <div class="transport-card">
-      <div class="transport-title">✈️ 航班資訊</div>
-      <div class="transport-row">
-        <div><div class="transport-label">去程</div><div class="transport-val">BR102 桃園→福岡</div></div>
-        <div class="fare-badge">15:10→18:20</div>
-      </div>
-      <div class="transport-row">
-        <div><div class="transport-label">回程</div><div class="transport-val">BR105 福岡→桃園</div></div>
-        <div class="fare-badge">12:20→13:45</div>
-      </div>
-    </div>
-    <div class="transport-card">
-      <div class="transport-title">🚇 地鐵常用路線</div>
-      <div class="transport-row"><div><div class="transport-label">福岡機場→博多</div><div class="transport-val">空港線 約5分</div></div><span class="fare-badge">¥260</span></div>
-      <div class="transport-row"><div><div class="transport-label">福岡機場→祇園</div><div class="transport-val">空港線 約20分</div></div><span class="fare-badge">¥310</span></div>
-      <div class="transport-row"><div><div class="transport-label">博多→天神</div><div class="transport-val">空港線 約5分</div></div><span class="fare-badge">¥210</span></div>
-      <div class="transport-row"><div><div class="transport-label">天神→大濠公園</div><div class="transport-val">七隈線 約5分</div></div><span class="fare-badge">¥260</span></div>
-      <div class="transport-row"><div><div class="transport-label">中洲川端→大濠</div><div class="transport-val">約15分</div></div><span class="fare-badge">¥260</span></div>
-    </div>
-    <div class="transport-card">
-      <div class="transport-title">🚃 西鐵電車</div>
-      <div class="transport-row"><div><div class="transport-label">天神→太宰府（D5）</div><div class="transport-val">約40分</div></div><span class="fare-badge">¥420/人</span></div>
-    </div>
-    <div class="transport-card">
-      <div class="transport-title">🚂 JR長途</div>
-      <div class="transport-row"><div><div class="transport-label">由布院之森（D2去程）</div><div class="transport-val">博多→由布院 2h14m</div></div><span class="fare-badge">¥4,400</span></div>
-      <div class="transport-row"><div><div class="transport-label">普通列車（D3回程）</div><div class="transport-val">由布院→博多 約2h</div></div><span class="fare-badge">¥1,860</span></div>
-    </div>
-    <div class="transport-card">
-      <div class="transport-title">🚗 自駕（D6 5/28）</div>
-      <div class="transport-row"><div><div class="transport-label">AVIS 吳服町 08:00取車</div><div class="transport-val">租車費</div></div><span class="fare-badge">約¥15,000</span></div>
-      <div class="transport-row"><div><div class="transport-label">福岡→九州動物公園</div><div class="transport-val">約40分</div></div><span class="fare-badge">高速¥1,000</span></div>
-      <div class="transport-row"><div><div class="transport-label">別府→福岡</div><div class="transport-val">約1.5小時</div></div><span class="fare-badge">高速¥2,500</span></div>
-      <div class="alert" style="margin-top:10px">⚠️ 台灣駕照＋國際駕照都要帶！嬰兒安全座椅提前向AVIS預約加租！日本靠左行駛！</div>
-    </div>
-    <div class="transport-card">
-      <div class="transport-title">🚕 計程車參考</div>
-      <div class="transport-row"><div><div class="transport-label">市區短程（3-5分）</div></div><span class="fare-badge">¥700–1,200</span></div>
-      <div class="transport-row"><div><div class="transport-label">天神↔博多（約10分）</div></div><span class="fare-badge">¥1,000–1,500</span></div>
-      <div class="transport-row"><div><div class="transport-label">市區長程（10-20分）</div></div><span class="fare-badge">¥2,000–4,000</span></div>
-    </div>
+<div class="sec-title">交通總覽</div>
+<div class="transport-section">
+  <div class="transport-card">
+    <div class="transport-title">✈️ 航班資訊</div>
+    <div class="transport-row"><div><div class="transport-label">去程</div><div class="transport-val">BR102 桃園→福岡</div></div><div class="fare-badge">15:10→18:20</div></div>
+    <div class="transport-row"><div><div class="transport-label">回程</div><div class="transport-val">BR105 福岡→桃園</div></div><div class="fare-badge">12:20→13:45</div></div>
   </div>
+  <div class="transport-card">
+    <div class="transport-title">🚕 計程車（D1 推薦）</div>
+    <div class="transport-row"><div><div class="transport-label">機場→祇園飯店（約15分）</div></div><div class="fare-badge">¥2,500–3,500</div></div>
+    <div class="transport-row"><div><div class="transport-label">兩家庭需各叫一台</div></div><div class="fare-badge">合計¥5,000–7,000</div></div>
+    <div class="alert" style="margin-top:8px">💡 行李多＋嬰幼兒推車，計程車比地鐵方便！機場出口直接排班</div>
+  </div>
+  <div class="transport-card">
+    <div class="transport-title">🚇 地鐵常用路線</div>
+    <div class="transport-row"><div><div class="transport-label">福岡機場→博多</div><div class="transport-val">空港線 約5分</div></div><span class="fare-badge">¥260</span></div>
+    <div class="transport-row"><div><div class="transport-label">博多→天神</div><div class="transport-val">空港線 約5分</div></div><span class="fare-badge">¥210</span></div>
+    <div class="transport-row"><div><div class="transport-label">天神→大濠公園</div><div class="transport-val">七隈線 約5分</div></div><span class="fare-badge">¥260</span></div>
+    <div class="transport-row"><div><div class="transport-label">博多站→機場</div><div class="transport-val">空港線 約5分</div></div><span class="fare-badge">¥260</span></div>
+  </div>
+  <div class="transport-card">
+    <div class="transport-title">🚃 西鐵電車</div>
+    <div class="transport-row"><div><div class="transport-label">天神→太宰府（D5）</div><div class="transport-val">天神→二日市→太宰府 約40分</div></div><span class="fare-badge">¥420/人</span></div>
+  </div>
+  <div class="transport-card">
+    <div class="transport-title">🚂 JR長途</div>
+    <div class="transport-row"><div><div class="transport-label">由布院之森 1號（D2去）</div><div class="transport-val">博多9:17→由布院11:31</div></div><span class="fare-badge">¥4,400/人</span></div>
+    <div class="transport-row"><div><div class="transport-label">普通列車（D3回）</div><div class="transport-val">由布院→博多 約2小時</div></div><span class="fare-badge">¥1,860/人</span></div>
+  </div>
+  <div class="transport-card">
+    <div class="transport-title">🚗 自駕（D6 5/28）</div>
+    <div class="transport-row"><div><div class="transport-label">AVIS 吳服町 08:00取車</div></div><span class="fare-badge">約¥15,000</span></div>
+    <div class="transport-row"><div><div class="transport-label">別府→福岡（高速）</div></div><span class="fare-badge">高速¥2,500</span></div>
+    <div class="alert" style="margin-top:8px">⚠️ 台灣駕照＋國際駕照！日本靠左行駛！嬰兒安全座椅提前向AVIS預約加租</div>
+  </div>
+</div>
 </div>
 
 <!-- HOTEL -->
 <div id="hotel" class="section">
-  <div class="sec-title">住宿安排</div>
-  <div class="hotel-section">
-    <div class="hotel-card">
-      <div class="hotel-header">
-        <div class="hotel-name">Nishitetsu Hotel Croom<br>Hakata Gion Kushida Shrine</div>
-        <div class="hotel-nights">5/23–5/24 ｜ 1晚（兩家庭）</div>
-      </div>
-      <div class="hotel-body">
-        <div class="hotel-addr">📍 812-0038 福岡縣福岡市博多區祇園町6-30</div>
-        <div class="tl-desc">地鐵祇園站步行即達，距Kawaya居酒屋步行4分鐘，附近有MaxValu超市</div>
-        <a class="map-btn" href="https://maps.google.com/?q=西鉄ホテルクルーム博多祇園" target="_blank">📍 開啟導航</a>
-      </div>
+<div class="sec-title">住宿安排</div>
+<div class="hotel-section">
+  <div class="hotel-card">
+    <div class="hotel-header">
+      <div class="hotel-name">Nishitetsu Hotel Croom Hakata Gion Kushida Shrine</div>
+      <div class="hotel-nights">5/23–5/24 ｜ 1晚（兩家庭）</div>
     </div>
-    <div class="hotel-card">
-      <div class="hotel-header">
-        <div class="hotel-name">貸し切り宿 世紡 YOTSUMUGI<br>sakazuki and iyasaka</div>
-        <div class="hotel-nights">5/24–5/25 ｜ 1晚（包棟溫泉）</div>
-      </div>
-      <div class="hotel-body">
-        <div class="hotel-addr">📍 879-5102 大分縣由布市湯布院町川上3728-23</div>
-        <div class="tl-desc">包棟民宿，私人溫泉！可帶寶寶一起泡湯，由布院車站附近</div>
-        <a class="map-btn" href="https://maps.google.com/?q=世紡YOTSUMUGI由布院" target="_blank">📍 開啟導航</a>
-      </div>
-    </div>
-    <div class="hotel-card">
-      <div class="hotel-header">
-        <div class="hotel-name">KOKO HOTEL Fukuoka Tenjin</div>
-        <div class="hotel-nights">5/25–5/30 ｜ 5晚（家庭 A）</div>
-      </div>
-      <div class="hotel-body">
-        <div class="hotel-addr">📍 福岡市中央区天神周辺</div>
-        <div class="tl-desc">天神商圈核心，逛街超方便！步行可達天神地下街、各大百貨</div>
-        <a class="map-btn" href="https://maps.google.com/?q=KOKO+HOTEL+福岡天神" target="_blank">📍 開啟導航</a>
-      </div>
-    </div>
-    <div class="hotel-card">
-      <div class="hotel-header">
-        <div class="hotel-name">Hotel Vista Fukuoka<br>Nakasu-Kawabata</div>
-        <div class="hotel-nights">5/25–5/30 ｜ 5晚（家庭 B）</div>
-      </div>
-      <div class="hotel-body">
-        <div class="hotel-addr">📍 福岡市博多区中洲川端周辺</div>
-        <div class="tl-desc">中洲川端站附近，距麵包超人博物館步行可達，DONKI就在旁邊！</div>
-        <a class="map-btn" href="https://maps.google.com/?q=Hotel+Vista+Fukuoka+Nakasu" target="_blank">📍 開啟導航</a>
-      </div>
-    </div>
-    <div class="transport-card">
-      <div class="transport-title">💡 住宿小提示</div>
-      <div class="info-item" style="padding:8px 0;font-size:12px;border-bottom:1px solid var(--gray-light);line-height:1.6">🍼 嬰兒床記得提前Email備註，數量有限</div>
-      <div class="info-item" style="padding:8px 0;font-size:12px;border-bottom:1px solid var(--gray-light);line-height:1.6">🔥 需要熱水泡奶，直接跟餐廳服務生說，大多樂意提供</div>
-      <div class="info-item" style="padding:8px 0;font-size:12px;border-bottom:1px solid var(--gray-light);line-height:1.6">🛁 日本飯店浴室多有浴缸，可給寶寶泡澡</div>
-      <div class="info-item" style="padding:8px 0;font-size:12px;line-height:1.6">🧺 洗衣機投幣式，約¥200–300一次</div>
+    <div class="hotel-body">
+      <div class="hotel-addr">📍 福岡市博多区祇園町6-30</div>
+      <div class="tl-desc">地鐵祇園站步行即達，距Kawaya居酒屋步行4分鐘，旁有MaxValu超市</div>
+      <a class="map-btn" href="https://maps.google.com/?q=西鉄ホテルクルーム博多祇園祇園町6-30" target="_blank">📍 開啟導航</a>
     </div>
   </div>
+  <div class="hotel-card">
+    <div class="hotel-header">
+      <div class="hotel-name">貸し切り宿 世紡 YOTSUMUGI</div>
+      <div class="hotel-nights">5/24–5/25 ｜ 1晚（包棟溫泉）</div>
+    </div>
+    <div class="hotel-body">
+      <div class="hotel-addr">📍 大分県由布市湯布院町川上3728-23</div>
+      <div class="tl-desc">包棟民宿！私人溫泉，可帶寶寶一起泡湯，由布院車站附近</div>
+      <a class="map-btn" href="https://maps.google.com/?q=世紡YOTSUMUGI由布院川上3728-23" target="_blank">📍 開啟導航</a>
+    </div>
+  </div>
+  <div class="hotel-card">
+    <div class="hotel-header">
+      <div class="hotel-name">KOKO HOTEL Fukuoka Tenjin</div>
+      <div class="hotel-nights">5/25–5/30 ｜ 5晚（家庭 A）</div>
+    </div>
+    <div class="hotel-body">
+      <div class="hotel-addr">📍 福岡市中央区天神周辺</div>
+      <div class="tl-desc">天神商圈核心，逛街超方便</div>
+      <a class="map-btn" href="https://maps.google.com/?q=KOKO+HOTEL福岡天神" target="_blank">📍 開啟導航</a>
+    </div>
+  </div>
+  <div class="hotel-card">
+    <div class="hotel-header">
+      <div class="hotel-name">Hotel Vista Fukuoka Nakasu-Kawabata</div>
+      <div class="hotel-nights">5/25–5/30 ｜ 5晚（家庭 B）</div>
+    </div>
+    <div class="hotel-body">
+      <div class="hotel-addr">📍 福岡市博多区中洲川端周辺</div>
+      <div class="tl-desc">中洲川端站附近，距麵包超人博物館步行可達，DONKI就在旁邊</div>
+      <a class="map-btn" href="https://maps.google.com/?q=Hotel+Vista+Fukuoka+Nakasu+Kawabata" target="_blank">📍 開啟導航</a>
+    </div>
+  </div>
+  <div class="transport-card">
+    <div class="transport-title">💡 住宿小提示</div>
+    <div class="info-item" style="padding:8px 0;font-size:12px;border-bottom:1px solid var(--gray-light);line-height:1.6">🍼 嬰兒床記得提前Email備註，數量有限</div>
+    <div class="info-item" style="padding:8px 0;font-size:12px;border-bottom:1px solid var(--gray-light);line-height:1.6">🔥 需要熱水泡奶，直接跟餐廳服務生說</div>
+    <div class="info-item" style="padding:8px 0;font-size:12px;line-height:1.6">🧺 洗衣機投幣式，約¥200–300一次</div>
+  </div>
+</div>
 </div>
 
 <!-- PACKING -->
 <div id="packing" class="section">
-  <div class="sec-title">行李清單</div>
-  <div class="packing-section">
-    <div class="pack-category">
-      <div class="pack-title">👶 嬰幼兒必備</div>
-      <div class="pack-grid">
-        <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>尿布（1.5倍量）</div>
-        <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>濕紙巾</div>
-        <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>奶粉/副食品</div>
-        <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>輕便推車</div>
-        <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>安撫奶嘴</div>
-        <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>小玩具零食</div>
-        <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>哺乳巾</div>
-        <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>溢乳墊</div>
-        <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>退燒藥</div>
-        <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>止瀉藥</div>
-        <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>嬰兒防曬</div>
-        <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>保濕乳</div>
-      </div>
-    </div>
-    <div class="pack-category">
-      <div class="pack-title">🪪 證件 &amp; 重要物品</div>
-      <div class="pack-grid">
-        <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>護照（全員）</div>
-        <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>台灣駕照</div>
-        <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>國際駕照</div>
-        <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>機票（截圖）</div>
-        <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>飯店訂單</div>
-        <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>旅平險保單</div>
-        <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>信用卡</div>
-        <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>日圓現金</div>
-      </div>
-    </div>
-    <div class="pack-category">
-      <div class="pack-title">📱 電子 &amp; 網路</div>
-      <div class="pack-grid">
-        <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>日本上網SIM</div>
-        <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>行動電源</div>
-        <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>充電線（全員）</div>
-        <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>相機</div>
-        <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>記憶卡</div>
-        <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>耳機</div>
-      </div>
-    </div>
-    <div class="pack-category">
-      <div class="pack-title">👗 衣物</div>
-      <div class="pack-grid">
-        <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>輕薄外套</div>
-        <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>短袖（7件）</div>
-        <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>長褲（3件）</div>
-        <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>寶寶衣+3套</div>
-        <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>雨傘</div>
-        <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>好走的鞋</div>
-      </div>
-    </div>
-    <div class="pack-category">
-      <div class="pack-title">🧴 盥洗 &amp; 健康</div>
-      <div class="pack-grid">
-        <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>防曬乳</div>
-        <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>常備藥</div>
-        <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>暈車藥</div>
-        <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>OK繃</div>
-        <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>休足時間</div>
-        <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>保溫瓶</div>
-      </div>
+<div class="sec-title">行李清單</div>
+<div class="packing-section">
+  <div class="pack-category">
+    <div class="pack-title">👶 嬰幼兒必備</div>
+    <div class="pack-grid">
+      <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>尿布（1.5倍量）</div>
+      <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>濕紙巾</div>
+      <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>奶粉/副食品</div>
+      <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>輕便推車</div>
+      <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>安撫奶嘴</div>
+      <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>小玩具零食</div>
+      <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>哺乳巾</div>
+      <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>溢乳墊</div>
+      <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>退燒藥</div>
+      <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>止瀉藥</div>
+      <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>嬰兒防曬</div>
+      <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>保濕乳</div>
     </div>
   </div>
+  <div class="pack-category">
+    <div class="pack-title">🪪 證件 &amp; 重要物品</div>
+    <div class="pack-grid">
+      <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>護照（全員）</div>
+      <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>台灣駕照</div>
+      <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>國際駕照</div>
+      <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>機票（截圖）</div>
+      <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>飯店訂單</div>
+      <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>旅平險保單</div>
+      <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>信用卡</div>
+      <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>日圓現金</div>
+    </div>
+  </div>
+  <div class="pack-category">
+    <div class="pack-title">📱 電子 &amp; 網路</div>
+    <div class="pack-grid">
+      <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>日本上網SIM</div>
+      <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>行動電源</div>
+      <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>充電線</div>
+      <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>相機</div>
+      <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>記憶卡</div>
+      <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>耳機</div>
+    </div>
+  </div>
+  <div class="pack-category">
+    <div class="pack-title">👗 衣物</div>
+    <div class="pack-grid">
+      <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>輕薄外套</div>
+      <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>短袖（7件）</div>
+      <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>長褲（3件）</div>
+      <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>寶寶衣+3套</div>
+      <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>雨傘</div>
+      <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>好走的鞋</div>
+    </div>
+  </div>
+  <div class="pack-category">
+    <div class="pack-title">🧴 盥洗 &amp; 健康</div>
+    <div class="pack-grid">
+      <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>防曬乳</div>
+      <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>常備藥</div>
+      <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>暈車藥</div>
+      <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>OK繃</div>
+      <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>休足時間</div>
+      <div class="pack-item" onclick="toggleCheck(this)"><div class="pack-check"></div>保溫瓶</div>
+    </div>
+  </div>
+</div>
 </div>
 
 <!-- BUDGET -->
 <div id="budget" class="section">
-  <div class="sec-title">預算估算</div>
-  <div class="budget-section">
-    <div class="budget-total">
-      <div class="budget-total-label">8天預估總花費（不含機票・飯店・購物）</div>
-      <div class="budget-total-val">¥ 228,600+</div>
-      <div class="budget-total-sub">4大2小 ｜ 預算無限制，盡情玩！</div>
-    </div>
-    <div class="budget-card">
-      <div class="budget-day-title">📅 D1 5/23 抵達日</div>
-      <div class="budget-row"><span class="label">地鐵（機場→祇園）</span><span class="val">¥2,500</span></div>
-      <div class="budget-row"><span class="label">晚餐 Kawaya</span><span class="val">¥15,000</span></div>
-      <div class="budget-row"><span class="label">超市採購</span><span class="val">¥5,000</span></div>
-      <div class="budget-row total"><span class="label">小計</span><span class="val">¥22,500</span></div>
-    </div>
-    <div class="budget-card">
-      <div class="budget-day-title">📅 D2 5/24 由布院</div>
-      <div class="budget-row"><span class="label">由布院之森（4人）</span><span class="val">¥17,600</span></div>
-      <div class="budget-row"><span class="label">湯之坪街道美食</span><span class="val">¥8,000</span></div>
-      <div class="budget-row"><span class="label">晚餐 釜飯心</span><span class="val">¥15,000</span></div>
-      <div class="budget-row"><span class="label">超市消夜</span><span class="val">¥5,000</span></div>
-      <div class="budget-row total"><span class="label">小計</span><span class="val">¥45,600</span></div>
-    </div>
-    <div class="budget-card">
-      <div class="budget-day-title">📅 D3 5/25 回福岡・屋台</div>
-      <div class="budget-row"><span class="label">JR回博多（4人）</span><span class="val">¥7,440</span></div>
-      <div class="budget-row"><span class="label">午餐</span><span class="val">¥8,000</span></div>
-      <div class="budget-row"><span class="label">藥妝採買</span><span class="val">¥10,000</span></div>
-      <div class="budget-row"><span class="label">屋台晚餐</span><span class="val">¥8,000</span></div>
-      <div class="budget-row total"><span class="label">小計</span><span class="val">¥33,440</span></div>
-    </div>
-    <div class="budget-card">
-      <div class="budget-day-title">📅 D4 5/26 市區觀光</div>
-      <div class="budget-row"><span class="label">地鐵</span><span class="val">¥3,000</span></div>
-      <div class="budget-row"><span class="label">早餐麵包</span><span class="val">¥3,000</span></div>
-      <div class="budget-row"><span class="label">麵包超人館（含午餐）</span><span class="val">¥10,000</span></div>
-      <div class="budget-row"><span class="label">&amp;LOCALS 下午茶</span><span class="val">¥3,500</span></div>
-      <div class="budget-row total"><span class="label">小計（晚餐另計）</span><span class="val">¥19,500</span></div>
-    </div>
-    <div class="budget-card">
-      <div class="budget-day-title">📅 D5 5/27 太宰府・燒肉</div>
-      <div class="budget-row"><span class="label">西鐵來回（4人）</span><span class="val">¥3,360</span></div>
-      <div class="budget-row"><span class="label">一蘭合格拉麵（4人）</span><span class="val">¥5,640</span></div>
-      <div class="budget-row"><span class="label">早餐+咖啡</span><span class="val">¥5,000</span></div>
-      <div class="budget-row total"><span class="label">小計（購物/燒肉另計）</span><span class="val">¥14,000+</span></div>
-    </div>
-    <div class="budget-card">
-      <div class="budget-day-title">📅 D6 5/28 自駕日</div>
-      <div class="budget-row"><span class="label">租車費</span><span class="val">¥15,000</span></div>
-      <div class="budget-row"><span class="label">油費+高速</span><span class="val">¥8,000</span></div>
-      <div class="budget-row"><span class="label">九州動物公園（4人）</span><span class="val">¥10,000</span></div>
-      <div class="budget-row"><span class="label">別府地獄（¥650×3×4人）</span><span class="val">¥7,800</span></div>
-      <div class="budget-row"><span class="label">LALAPORT 餐飲購物</span><span class="val">¥10,000</span></div>
-      <div class="budget-row total"><span class="label">小計</span><span class="val">¥50,800</span></div>
-    </div>
-    <div class="budget-card">
-      <div class="budget-day-title">📅 D7 5/29 天神逛街</div>
-      <div class="budget-row"><span class="label">早餐+午餐+晚餐</span><span class="val">¥21,000</span></div>
-      <div class="budget-row total"><span class="label">小計（購物另計）</span><span class="val">¥21,000</span></div>
-    </div>
-    <div class="budget-card">
-      <div class="budget-day-title">📅 D8 5/30 回程日</div>
-      <div class="budget-row"><span class="label">地鐵+早餐</span><span class="val">¥5,000</span></div>
-      <div class="budget-row"><span class="label">伴手禮採購</span><span class="val">¥20,000+</span></div>
-      <div class="budget-row total"><span class="label">小計</span><span class="val">¥25,000+</span></div>
-    </div>
-    <div class="info-card">
-      <div class="info-title">💡 實用資訊</div>
-      <div class="info-item"><strong>換匯</strong> 台灣先換好，或福岡機場換匯。SEVEN ATM也可提領</div>
-      <div class="info-item"><strong>交通卡</strong> 福岡市地鐵一日券¥700，多次進出超划算</div>
-      <div class="info-item"><strong>上網</strong> 日本eSIM最方便，兩家庭各一張</div>
-      <div class="info-item"><strong>現金</strong> 屋台、Kawaya等只收現金！多帶日幣</div>
-      <div class="info-item"><strong>退稅</strong> 消費¥5,000以上可辦理，帶護照</div>
-      <div class="info-item"><strong>保險</strong> 含緊急醫療的旅平險，帶嬰幼兒必備！</div>
-    </div>
+<div class="sec-title">預算估算</div>
+<div class="budget-section">
+  <div class="budget-total">
+    <div class="budget-total-label">8天預估總花費（不含機票・飯店・購物）</div>
+    <div class="budget-total-val">¥ 232,000+</div>
+    <div class="budget-total-sub">4大2小 ｜ 預算無限制，盡情玩！</div>
   </div>
+  <div class="budget-card">
+    <div class="budget-day-title">📅 D1 5/23 抵達日</div>
+    <div class="budget-row"><span class="label">計程車（2台）</span><span class="val">¥7,000</span></div>
+    <div class="budget-row"><span class="label">晚餐 Kawaya</span><span class="val">¥15,000</span></div>
+    <div class="budget-row"><span class="label">超市採購</span><span class="val">¥5,000</span></div>
+    <div class="budget-row total"><span class="label">小計</span><span class="val">¥27,000</span></div>
+  </div>
+  <div class="budget-card">
+    <div class="budget-day-title">📅 D2 5/24 由布院</div>
+    <div class="budget-row"><span class="label">由布院之森（4人）</span><span class="val">¥17,600</span></div>
+    <div class="budget-row"><span class="label">COMICO門票（4人）</span><span class="val">¥6,000</span></div>
+    <div class="budget-row"><span class="label">湯之坪街道美食</span><span class="val">¥8,000</span></div>
+    <div class="budget-row"><span class="label">晚餐 釜飯心</span><span class="val">¥15,000</span></div>
+    <div class="budget-row"><span class="label">超市消夜</span><span class="val">¥5,000</span></div>
+    <div class="budget-row total"><span class="label">小計</span><span class="val">¥51,600</span></div>
+  </div>
+  <div class="budget-card">
+    <div class="budget-day-title">📅 D3 5/25 回福岡・屋台</div>
+    <div class="budget-row"><span class="label">JR回博多（4人）</span><span class="val">¥7,440</span></div>
+    <div class="budget-row"><span class="label">午餐</span><span class="val">¥8,000</span></div>
+    <div class="budget-row"><span class="label">藥妝採買</span><span class="val">¥10,000</span></div>
+    <div class="budget-row"><span class="label">屋台晚餐</span><span class="val">¥8,000</span></div>
+    <div class="budget-row total"><span class="label">小計</span><span class="val">¥33,440</span></div>
+  </div>
+  <div class="budget-card">
+    <div class="budget-day-title">📅 D4 5/26 市區觀光</div>
+    <div class="budget-row"><span class="label">地鐵</span><span class="val">¥3,000</span></div>
+    <div class="budget-row"><span class="label">麵包超人館（含午餐）</span><span class="val">¥10,000</span></div>
+    <div class="budget-row"><span class="label">&amp;LOCALS 下午茶</span><span class="val">¥3,500</span></div>
+    <div class="budget-row total"><span class="label">小計（晚餐另計）</span><span class="val">¥16,500</span></div>
+  </div>
+  <div class="budget-card">
+    <div class="budget-day-title">📅 D5 5/27 太宰府・燒肉</div>
+    <div class="budget-row"><span class="label">西鐵來回（4人）</span><span class="val">¥3,360</span></div>
+    <div class="budget-row"><span class="label">一蘭合格拉麵（4人）</span><span class="val">¥5,640</span></div>
+    <div class="budget-row"><span class="label">早餐+咖啡</span><span class="val">¥5,000</span></div>
+    <div class="budget-row total"><span class="label">小計（購物/燒肉另計）</span><span class="val">¥14,000+</span></div>
+  </div>
+  <div class="budget-card">
+    <div class="budget-day-title">📅 D6 5/28 自駕日</div>
+    <div class="budget-row"><span class="label">租車費+油費+高速</span><span class="val">¥23,000</span></div>
+    <div class="budget-row"><span class="label">動物公園（4人）</span><span class="val">¥10,000</span></div>
+    <div class="budget-row"><span class="label">別府地獄（3處×4人）</span><span class="val">¥7,800</span></div>
+    <div class="budget-row"><span class="label">LALAPORT 餐飲</span><span class="val">¥10,000</span></div>
+    <div class="budget-row total"><span class="label">小計</span><span class="val">¥50,800</span></div>
+  </div>
+  <div class="budget-card">
+    <div class="budget-day-title">📅 D7+D8 天神＋回程</div>
+    <div class="budget-row"><span class="label">D7 餐飲</span><span class="val">¥21,000</span></div>
+    <div class="budget-row"><span class="label">D8 伴手禮+交通</span><span class="val">¥25,000+</span></div>
+    <div class="budget-row total"><span class="label">小計</span><span class="val">¥46,000+</span></div>
+  </div>
+  <div class="info-card">
+    <div style="font-size:14px;font-weight:800;margin-bottom:10px">💡 實用資訊</div>
+    <div class="info-item"><strong>換匯</strong> 台灣先換好，或福岡機場換匯。SEVEN ATM可提領</div>
+    <div class="info-item"><strong>交通卡</strong> 福岡市地鐵一日券¥700超划算</div>
+    <div class="info-item"><strong>上網</strong> 日本eSIM最方便，兩家庭各一張</div>
+    <div class="info-item"><strong>現金</strong> 屋台、Kawaya只收現金！多帶日幣</div>
+    <div class="info-item"><strong>COMICO預約</strong> 出發前記得上官網預約，省¥200且避免售罄</div>
+    <div class="info-item"><strong>退稅</strong> 消費¥5,000以上可辦理，帶護照</div>
+    <div class="info-item"><strong>保險</strong> 含緊急醫療的旅平險，帶嬰幼兒必備！</div>
+  </div>
+</div>
 </div>
 
 <script>
-function showSection(id, btn) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+function showSection(id,btn){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   btn.classList.add('active');
-  window.scrollTo({top: 0, behavior: 'smooth'});
+  window.scrollTo({top:0,behavior:'smooth'});
 }
-
-function showDay(index, btn) {
-  document.querySelectorAll('[id^="day"]').forEach(d => d.style.display = 'none');
-  document.querySelectorAll('.day-pill').forEach(p => p.classList.remove('active'));
-  document.getElementById('day' + index).style.display = 'block';
+function showDay(i,btn){
+  document.querySelectorAll('[id^="day"]').forEach(d=>d.style.display='none');
+  document.querySelectorAll('.day-pill').forEach(p=>p.classList.remove('active'));
+  document.getElementById('day'+i).style.display='block';
   btn.classList.add('active');
-  btn.scrollIntoView({behavior: 'smooth', block: 'nearest', inline: 'center'});
-  window.scrollTo({top: 0, behavior: 'smooth'});
+  btn.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+  window.scrollTo({top:0,behavior:'smooth'});
 }
-
-function toggleCheck(el) {
+function toggleCheck(el){
   el.classList.toggle('checked');
-  const check = el.querySelector('.pack-check');
-  check.textContent = el.classList.contains('checked') ? '✓' : '';
+  el.querySelector('.pack-check').textContent=el.classList.contains('checked')?'✓':'';
 }
 </script>
 </body>
